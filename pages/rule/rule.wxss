@@ -1,0 +1,50 @@
+/*.i-clock-l {
+	width: 190rpx;
+	height: 206rpx;
+	margin: 46rpx auto 18rpx;
+	display: block;
+}*/
+.icon {
+	width: 232rpx;
+	height: 224rpx;
+	margin: 62rpx auto 0rpx;
+	display: block;
+}
+/*.i-gift {
+	width: 166rpx;
+	height: 162rpx;
+	margin: 48rpx auto 28rpx;
+	display: block;
+}*/
+.tip-txt {
+	text-align: center;
+	font-size: 29rpx;
+	color: #122d4d;
+	line-height: 40rpx;
+}
+.important-color {
+	color: #6aa4ef;
+}
+.tip-txt > .num {
+	width: 40rpx;
+	height: 40rpx;
+	line-height: 40rpx;
+	border-radius: 50%;
+	color: #fff;
+	text-align: center;
+	background-color: #6aa4ef;
+	display: inline-block;
+	margin-right: 10rpx;
+}
+.ok-btn {
+	position: fixed;
+	bottom: 145rpx;
+	left: 50%;
+	transform: translateX(-50%);
+	/*margin: 44rpx auto 0;*/
+}
+.rule-image {
+	width: 100%;
+	height: 100%;
+	display: block;
+}

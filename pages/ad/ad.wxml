@@ -1,0 +1,5 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="count-down">{{time}}</view>
+  <image src="{{indexData.ad}}" class="ad-img" background-size="cover"></image>
+</view>

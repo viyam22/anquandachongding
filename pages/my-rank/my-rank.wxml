@@ -1,0 +1,19 @@
+<view class="container">
+  <image class="i-sound" src="../../images/i-sound.png"></image>
+
+  <image class="img-bear" src="../../images/img-bear.png"></image>
+  <view class="nickname">{{userInfo.nickName}}</view>
+
+  <view class="item-list">
+    <view class="item-bg">
+      <view class="item-name">排名</view>
+      <view class="item-value">{{rankData.friend.me[0].sort}}名</view>
+    </view>
+    <view class="item-bg">
+      <view class="item-name">成绩</view>
+      <view class="item-value">{{rankData.friend.me[0].score}}</view>
+    </view>
+  </view>
+
+  <image class="bg-img" src="../../images/img0.png"></image>
+</view>

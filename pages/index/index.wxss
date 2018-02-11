@@ -1,0 +1,104 @@
+page {
+	background-color: #bfd9ee;
+	width: 100%;
+	height: 100%;
+}
+.banner-swiper {
+	width: 100%;
+	height: 340rpx;
+	background-color: #c0deed;
+}
+.container {
+	background-color: #f1f7fc;
+	overflow: hidden;
+	padding: 44rpx;
+	box-sizing: border-box;
+}
+.box-l {
+	height: 282rpx;
+	width: 664rpx;
+	background-color: #fff;
+	border-radius: 30rpx;
+	margin: 20rpx auto 0;
+	position: relative;
+}
+.box-s {
+	width: 316rpx;
+	height: 202rpx;
+	background-color: #fff;
+	border-radius: 30rpx;
+	margin-top: 20rpx;
+	position: relative;
+}
+.box-s-con > .box-s:first-child {
+	float: left;
+}
+.box-s-con > .box-s:last-child {
+	float: right;
+}
+.i-answer {
+	width: 158rpx;
+	height: 233rpx;
+	position: absolute;
+	top: 50%;
+	left: 92rpx;
+	transform: translateY(-50%);
+}
+.i-life {
+	width: 49rpx;
+	height: 49rpx;
+	margin-left: 330rpx;
+	padding: 5rpx;
+	display: block;
+	float: left;
+}
+.life-txt {
+	height: 57rpx;
+	line-height: 57rpx;
+	font-size: 42rpx;
+	color: #6aa4ef;
+	font-weight: bold;
+	position: absolute;
+	top: 0;
+	transform: translateY(50%);
+}
+.icon-box > image {
+	position: absolute;
+	left: 50%;
+	top: 26rpx;
+	transform: translate(-50%);
+}
+.i-ranking {
+	width: 224rpx;
+	height: 163rpx;
+	position: absolute;
+	left: 50%;
+	top: 40rpx;
+	transform: translate(-50%);
+}
+.i-rule {
+	width: 104rpx;
+	height: 114rpx;
+}
+.i-power {
+	width: 77rpx;
+	height: 117rpx;
+}
+.ranking-txt {
+	font-size: 42rpx;
+	color: #6aa4ef;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	top: 210rpx;
+}
+.icon-txt {
+	font-size: 32rpx;
+	color: #6aa4ef;
+	font-weight: bold;
+	width: 100%;
+	text-align: center;
+	position: absolute;
+	top: 148rpx;
+}

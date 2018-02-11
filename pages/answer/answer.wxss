@@ -1,0 +1,96 @@
+.container {
+	padding: 0 60rpx 0 80rpx;
+}
+.phone-txt {
+	
+	/*margin-right: 60rpx;*/
+	/*float: right;*/
+}
+.i-phone {
+	width: 17rpx;
+	height: 26rpx;
+	margin-right: 17rpx;
+	display: block;
+	float: left;
+}
+.right-txt {
+	float: right;
+	text-align: left;
+	line-height: 46rpx;
+	font-size: 24rpx;
+	margin-top: 88rpx;
+}
+.progress-class {
+	width: 100%;
+	height: 32rpx;
+	border-radius: 16rpx;
+	padding-top: 80rpx;
+}
+.title-txt {
+	font-size: 37rpx;
+	line-height: 50rpx;
+	text-align: center;
+	color: #122d4d;
+	height: 100rpx;
+	width: 100%;
+	margin: 15rpx 0;
+}
+.option-item {
+	width: 600rpx;
+	height: 128rpx;
+	margin-bottom: 13rpx;
+	text-align: center;
+	line-height: 128rpx;
+	font-size: 32rpx;
+	color: #6c7076;
+	font-weight: bold;
+}
+.item-default {
+	background-color: #f0f0f0;
+}
+.item-wrong {
+	background-color: #828d98;
+}
+.item-right {
+	background-color: #6285ff;
+}
+.i-cup {
+	width: 369rpx;
+	height: 393rpx;
+	margin: 275rpx auto 0;
+	display: block;
+}
+.btn-box {
+	margin-top: 170rpx;
+}
+.share-btn {
+	float: left;
+}
+.rank-btn {
+	float: right;
+	background-color: #a08fff;
+}
+.img-fail {
+	width: 319rpx;
+	height: 476rpx;
+	display: block;
+	margin: 280rpx auto 0;
+}
+.invitation-btn {
+	margin: 46rpx auto 0;
+}
+.progress-con {
+	width: 100%;
+	height: 32rpx;
+	border-radius: 16rpx;
+	padding-top: 80rpx;
+	/*text-shadow: #000 1rpx 1rpx 1rpx;*/
+}
+.progress-bar {
+	width: 50%;
+	height: 32rpx;
+	border-radius: 16rpx;
+	margin-top: 200rpx;
+	box-sizing: border-box;
+	background-color: #87a0ff;
+}

@@ -1,0 +1,136 @@
+page {
+	background-color: #f2f8fd;
+}
+.container {
+	padding: 22rpx 32rpx;
+}
+.tag-lists {
+	width: 334rpx;
+	height: 50rpx;
+	line-height: 50rpx;
+	color: #fff;
+	text-align: center;
+	font-size: 22rpx;
+	margin: 0 auto;
+}
+.tag-item {
+	width: 50%;
+	height: 100%;
+	box-sizing: border-box;
+}
+.item0 {
+	padding-left: 25rpx;
+	float: left;
+	border-radius: 25rpx 0 0 25rpx;
+}
+.item1 {
+	padding-right: 25rpx;
+	float: right;
+	border-radius: 0 25rpx 25rpx 0;
+}
+.item-default {
+	background-color: #79bcff!important;
+}
+.item-selected {
+	background-color: #367cd8!important;
+}
+.info {
+	width: 100%;
+	height: 127rpx;
+	background-color: #367cd8;
+	border-radius: 15rpx;
+	margin-top: 22rpx;
+	padding: 15rpx 0;
+	box-sizing: border-box;
+}
+.info > .rank {
+	background-color: #fff;
+	text-align: center;
+	width: 136rpx;
+	height: 97rpx;
+	line-height: 97rpx;
+	border-radius: 0 15rpx 15rpx 0;
+	color: #367cd8;
+	font-size: 30rpx;
+	float: left;
+}
+.info .avata-img {
+	width: 77rpx;
+	height: 77rpx;
+	border-radius: 50%;
+	border: 5rpx #fff solid;
+	margin: 5rpx 5rpx 5rpx 50rpx;
+	float: left;
+	background-size: cover;
+}
+.info .txt-box {
+	font-size: 24rpx;
+	color: #fff;
+	line-height: 77rpx;
+	margin: 10rpx 0;
+	text-align: center;
+	height: 77rpx;
+}
+.info .nickname {
+	width: 150rpx;
+	float: left;
+}
+.info .time {
+	width: 230rpx;
+	float: left;
+}
+.rank-lists {
+	width: 100%;
+	margin-top: 24rpx;
+	background-color: #fff;
+	border-radius: 15rpx;
+	padding: 49rpx 0;
+	box-sizing: border-box;
+}
+.rank-item {
+	height: 115rpx;
+	line-height: 115rpx;
+	color: #31373d;
+	font-size: 24rpx;
+	text-align: center;
+}
+.rank-item > .rank {
+	width: 76rpx;
+	height: 100%;
+	background-color: #367cd8;
+	color: #fff;
+	font-size: 30rpx;
+	font-weight: 30rpx;
+	text-align: center;
+	float: left;
+}
+.rank-item-border {
+	border-bottom: 1rpx #f2f8fd solid; 
+}
+.rank-item:last-chlid {
+	border-bottom: none; 
+}
+.rank-item:first-child > .rank {
+	border-top-right-radius: 15rpx;
+}
+.rank-item:last-child > .rank {
+	border-bottom-right-radius: 15rpx;
+}
+.rank-item .avata-img {
+	margin: 19rpx 5rpx 19rpx 40rpx;
+	width: 77rpx;
+	height: 77rpx;
+	border-radius: 50%;
+	float: left;
+	background-color: #333;
+}
+.rank-item .nickname, .rank-item .time {
+	width: 230rpx;
+	float: left;
+}
+.exchange-btn {
+	margin: 28rpx auto;
+}
+.ban-btn {
+	background-color: #434441!important;
+}

@@ -1,0 +1,16 @@
+<view class="container">
+  <image class="rule-img" src="{{ruleData.data}}" background-size="cover"></image>
+
+  <!-- <image class="i-sound" src="../../images/i-sound.png"></image>
+
+  <image class="bg-img" src="../../images/img0.png"></image>
+
+  <image class="i-clock-l icon" src="../../images/i-clock-l.png"></image>
+  <view class="tip-txt"><text class="num">1</text>每场10题，<text class="important-color">10秒</text>内选出正确的唯一选项</view>
+  <image class="i-lose icon" src="../../images/i-lose.png"></image>
+  <view class="tip-txt"><text class="num">2</text>超时或回答错误你将被淘汰</view>
+  <image class="i-gift icon" src="../../images/i-gift.png"></image>
+  <view class="tip-txt"><text class="num">3</text>成绩优秀者可获得奖品</view> -->
+
+  <view class="btn ok-btn" bindtap="toIndexPage">确定</view>
+</view>

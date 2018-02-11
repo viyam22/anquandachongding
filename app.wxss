@@ -1,0 +1,26 @@
+@import "template/exam-hd.wxss";
+.bg-img {
+	width: 750rpx;
+	height: 694rpx;
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: -1;
+}
+.i-sound {
+	width: 29rpx;
+	height: 25rpx;
+	position: absolute;
+	top: 19rpx;
+	right: 29rpx;
+}
+.btn {
+	width: 270rpx;
+	height: 72rpx;
+	line-height: 72rpx;
+	border-radius: 36rpx;
+	color: #fff;
+	text-align: center;
+	background-color: #4d85cb;
+	font-size: 28rpx;
+}

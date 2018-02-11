@@ -1,0 +1,22 @@
+<view class="container">
+  <image class="i-sound" src="../../images/i-sound.png"></image>
+  
+  <image class="img-gift" src="../../images/img-gift.png"></image>
+
+  <view class="info">
+    <image class="txt-name txt" src="../../images/txt-name.png"></image>
+    <input class="input-box" bindinput="bindNameInput" />
+
+    <image class="txt-phone txt" src="../../images/txt-phone.png"></image>
+    <input class="input-box" bindinput="bindPhoneInput" />
+
+    <image class="txt-adress txt" src="../../images/txt-adress.png"></image>
+    <textarea class="textarea-box" bindinput="bindAdressTextArea" />
+
+    <view class="btn submit-btn" bindtap="submit">提交</view>
+  </view>
+
+  <view class="service">客服电话：400 0000 0000</view>
+
+  <image class="bg-img" src="../../images/img0.png"></image>
+</view>

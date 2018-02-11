@@ -1,0 +1,18 @@
+{
+  "pages":[
+    "pages/ad/ad",
+    "pages/index/index",
+    "pages/prize/prize",
+    "pages/answer/answer",
+    "pages/my-rank/my-rank",
+    "pages/rule/rule",
+    "pages/rank/rank",
+    "pages/answer-before/answer-before"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#31373d",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"white"
+  }
+}

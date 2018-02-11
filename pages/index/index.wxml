@@ -1,0 +1,30 @@
+<view>
+  <swiper class="banner-swiper" indicator-dots="true" indicator-color="rgba(255, 255, 255, 0.3)" indicator-active-color="#fff">
+    <block>
+      <swiper-item wx:for="{{indexData.poster}}" wx:key="{{item.id}}">
+        <image src="{{item.image}}" mode="center"/>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <view class="container">
+    <view class="box-l box-answer" bindtap="toExamPage">
+      <image class="i-answer" src="../../images/i-answer.png"></image>
+      <view class="life-txt"><image class="i-life" src="../../images/i-life.png"></image>生命值{{indexData.life}}</view>
+    </view>
+    <view class="box-l" bindtap="toRankPage">
+      <image class="i-ranking" src="../../images/i-ranking.png"></image>
+      <view class="ranking-txt">排行榜</view>
+    </view>
+    <view class="box-s-con" bindtap="toRulePage">
+      <view class="box-s icon-box">
+        <image class="i-rule" src="../../images/i-rule.png"></image>
+        <view class="icon-txt">规则说明</view>
+      </view>
+      <view class="box-s icon-box" bindtap="toSharePage">
+        <image class="i-power" src="../../images/i-power.png"></image>
+        <view class="icon-txt">获取能量</view>
+      </view>
+    </view>
+  </view>
+</view>
