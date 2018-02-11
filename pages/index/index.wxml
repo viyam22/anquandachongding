@@ -16,8 +16,8 @@
       <image class="i-ranking" src="../../images/i-ranking.png"></image>
       <view class="ranking-txt">排行榜</view>
     </view>
-    <view class="box-s-con" bindtap="toRulePage">
-      <view class="box-s icon-box">
+    <view class="box-s-con">
+      <view class="box-s icon-box" bindtap="toRulePage">
         <image class="i-rule" src="../../images/i-rule.png"></image>
         <view class="icon-txt">规则说明</view>
       </view>

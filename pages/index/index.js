@@ -43,5 +43,9 @@ Page({
       url: path.rulePage
     })
   },
-  
+  toSharePage:function(){
+    wx.navigateTo({
+      url: path.answerBeforePage
+    })
+  }
 })

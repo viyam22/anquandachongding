@@ -1,7 +1,9 @@
 const { api, config, path } = require('utils/config.js');
 
 App({
+  
   onLaunch: function (res) {
+ 
     // 展示本地存储能力
     console.log('APP,config', config)
     this.globalData.shareId = res.query.id || '0';

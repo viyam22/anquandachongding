@@ -8,6 +8,10 @@
 	font-size: 20rpx;
 	color: #fff;
 	margin: 12rpx auto 0;
+  display: none;
+}
+.i-sound{
+  display: none;
 }
 .life-txt {
 	font-size: 29rpx;
@@ -29,6 +33,7 @@
 	margin-top: 88rpx;
 	/*margin-right: 60rpx;*/
 	float: right;
+  display: none
 }
 .i-clock {
 	width: 24rpx;

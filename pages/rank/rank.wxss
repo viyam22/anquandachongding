@@ -110,10 +110,10 @@ page {
 .rank-item:last-chlid {
 	border-bottom: none; 
 }
-.rank-item:first-child > .rank {
+.rank-item:first-child .rank {
 	border-top-right-radius: 15rpx;
 }
-.rank-item:last-child > .rank {
+.rank-item:last-child .rank {
 	border-bottom-right-radius: 15rpx;
 }
 .rank-item .avata-img {

@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/ad/ad",
     "pages/index/index",
     "pages/prize/prize",
@@ -7,12 +7,13 @@
     "pages/my-rank/my-rank",
     "pages/rule/rule",
     "pages/rank/rank",
-    "pages/answer-before/answer-before"
+    "pages/answer-before/answer-before",
+    "pages/share/share"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#31373d",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "navigationBarTitleText": "安全大冲顶",
+    "navigationBarTextStyle": "white"
   }
 }
