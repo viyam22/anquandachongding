@@ -5,7 +5,6 @@ App({
   onLaunch: function (res) {
  
     // 展示本地存储能力
-    console.log('APP,config', config)
     this.globalData.shareId = res.query.id || '0';
     // 登录
     wx.login({

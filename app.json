@@ -1,13 +1,13 @@
 {
   "pages": [
-    "pages/ad/ad",
     "pages/index/index",
-    "pages/prize/prize",
     "pages/answer/answer",
+    "pages/answer-before/answer-before",
+    "pages/ad/ad",
+    "pages/prize/prize",
     "pages/my-rank/my-rank",
     "pages/rule/rule",
     "pages/rank/rank",
-    "pages/answer-before/answer-before",
     "pages/share/share"
   ],
   "window": {

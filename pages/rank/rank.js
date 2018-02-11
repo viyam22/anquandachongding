@@ -9,84 +9,7 @@ Page({
     showData: [],    // 展示数据
     tagIndex: 0
   },
-
-  test: function() {
-    // 测试数据
-    var rankData = [
-    {
-      "type": "friend",
-      "title": "好友排名",
-      "list": [
-        {
-          "openid": "213383",
-          "nickname": "张三",
-          "avataUrl": "http://admin.web.shuzitansuo.com/upload/images/ad/201710/b5e9a8c840f.jpg",
-          "score": "11分11秒.123",
-
-        },
-        {
-          "openid": "213383",
-          "nickname": "张三",
-          "avataUrl": "http://admin.web.shuzitansuo.com/upload/images/ad/201710/b5e9a8c840f.jpg",
-          "score": "11分11秒.123",
-        },
-        {
-          "openid": "213383",
-          "nickname": "张三",
-          "avataUrl": "http://admin.web.shuzitansuo.com/upload/images/ad/201710/b5e9a8c840f.jpg",
-          "score": "11分11秒.123",
-        }
-      ],
-      "me": [
-          {
-              "openid": "213383",
-              "nickname": "张三",
-              "avataUrl": "http://admin.web.shuzitansuo.com/upload/images/ad/201710/b5e9a8c840f.jpg",
-              "score": "11分11秒.123",
-              "sort": "第5名",
-          },
-        ]
-       },
-    {
-      "type": "world",
-      "title": "世界排名",
-      "prize": "1",
-      "list": [
-          {
-              "openid": "213383",
-              "nickname": "张三",
-              "avataUrl": "http://admin.web.shuzitansuo.com/upload/images/ad/201710/b5e9a8c840f.jpg",
-              "score": "11分11秒.123",
-          },
-          {
-              "openid": "213383",
-              "nickname": "张三",
-              "avataUrl": "http://admin.web.shuzitansuo.com/upload/images/ad/201710/b5e9a8c840f.jpg",
-              "score": "11分11秒.123",
-          },
-          {
-              "openid": "213383",
-              "nickname": "李四",
-              "avataUrl": "http://admin.web.shuzitansuo.com/upload/images/ad/201710/b5e9a8c840f.jpg",
-              "score": "11分11秒.123",
-          }
-      ],
-      "me": [
-          {
-              "openid": "213383",
-              "nickname": "张三",
-              "avataUrl": "http://admin.web.shuzitansuo.com/upload/images/ad/201710/b5e9a8c840f.jpg",
-              "score": "11分11秒.123",
-              "sort": "第115名",
-          },
-      ]
-      }
-    ]
-
-    this.setData({ rankData: rankData })
-
-  },
-
+  
   onLoad: function() {
     this.toggleTag();
     this.setData({ 
@@ -117,8 +40,9 @@ Page({
   },
 
   toPrizePage: function() {
+    var pathUrl = parseInt(this.data.rankData.prize_type) === 1 ? path.prizePage : path.indexPage;
     wx.navigateTo({
-      url: path.prizePage
+      url: pathUrl
     })
   },
   

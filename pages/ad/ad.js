@@ -6,7 +6,8 @@ const app = getApp()
 Page({
   data: {
     indexData: null,
-    time: 0
+    time: 0,
+    isShow: false
   },
 
   onLoad: function() {
@@ -19,9 +20,16 @@ Page({
           time: config.indexAdTime
         })
         clearInterval(getApi);
-        _this.toIndexPage();
+        if (!_this.data.indexData.ad) {
+          wx.navigateTo({
+            url: path.indexPage
+          })
+        } else {
+          _this.setData({ isShow: true })
+          _this.toIndexPage();
+        }
       }
-    }, 500)
+    }, 500);
   },
 
   toIndexPage: function() {

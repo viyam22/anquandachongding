@@ -13,7 +13,7 @@ Page({
     this.setData({ 
       questionData: app.globalData.questionData
     })
-    if (this.data.questionData.life !== 0) this.toAnswerPage();
+    // if (parseInt(this.data.questionData.life) !== 0) this.toAnswerPage();
   },
 
   onShareAppMessage: function (res) {

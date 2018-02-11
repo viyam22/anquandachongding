@@ -14,7 +14,10 @@ Page({
     shareImage: '',
     shareTitle: '',
     time: 0,
+    showTime: '',
     itemClass: [],    // 选项的Class
+    getTime: null,     // 定时器
+    isShowPopup: false
   },
 
   onLoad: function() {
@@ -27,22 +30,24 @@ Page({
 
   getTimeTip: function() {
     var _this = this;
-    var time = 0;
+    var time = 0, showTime;
     var getTime = setInterval(function() {
       time ++;
-      _this.setData({ time: time })
+      showTime = time > 60 ? Math.floor(time / 60) + '分' + time % 60 + '秒' : time + '秒'
+      _this.setData({ 
+        time: time,
+        showTime: showTime
+      })
     }, 1000)
+    _this.setData({ getTime: getTime });
   },
 
   initItem: function(data) {
     var _this = this;
     var itemClass = [];
-    console.log('initItem.data', data.options, data.isright, !data.isright);
 
     for(var i in data.options) {
-    // for (var i = 0, len = data.options.length; i < len; i++) {
       if (data.options.hasOwnProperty(i)) {
-        console.log('iiiiiii:', i)
         if (!data.isright) {
           itemClass.push('item-default');
         } else if (data.isright === -1) {   // 答错
@@ -54,7 +59,6 @@ Page({
             itemClass.push('item-default');
           }
         } else {
-          console.log('data.right:', data.right, 'i', i)
           if (data.answer === data.options[i]) {
             itemClass.push('item-right');
           } else {
@@ -64,7 +68,6 @@ Page({
       }
     }
     _this.setData({ itemClass: itemClass })
-    console.log('_this.data.itemClass', _this.data.itemClass);
   },
 
   postAnswer: function(e) {
@@ -97,52 +100,34 @@ Page({
         //   isright: 1,
         //   right: 4
         // }}
-        console.log('postAnswer', data)
         if (data.code === 0) {
           var answerData = data.data, shareImage = '', shareTitle = '', qsort = _this.data.qsort;
           if (!answerData.options) {
-            if (answerData.total === answerData.count) {
+            if (answerData.type === 3) {
               // 答案正确
+              clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
-              setTimeout(function() {_this.setData({ showPage: 1 })}, 2000)
-            } else {
+              setTimeout(function() {_this.setData({ showPage: 1 })}, config.showTipTime)
+            } else if (answerData.type === 4) {
               // 答案错误
+              clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
-              setTimeout(function() {_this.setData({ showPage: 2 })}, 2000)
+              setTimeout(function() {_this.setData({ showPage: 2 })}, config.showTipTime)
             }
           } else {
             if (answerData.total === answerData.count) {
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
-              setTimeout(function() {_this.setData({ showPage: 1 })}, 2000)
+              setTimeout(function() {_this.setData({ showPage: 1 })}, config.showTipTime)
             } else {
               // 下一题
               qsort ++;
-              setTimeout(function() { _this.nextQuestion() }, 2000);
+              setTimeout(function() { _this.nextQuestion() }, config.showTipTime);
               _this.initItem(answerData)
             }
           }
-
-
-          // if (answerData.isright === -1) {  
-          // // 答案错误
-          //   shareTitle = answerData.share_msg || '安全大冲顶';
-          //   shareImage = answerData.share_image || '';
-          //   setTimeout(function() {_this.setData({ showPage: 2 })}, 2000)
-          // } else {
-          //   // 答案正确
-          //   shareTitle = answerData.share_msg || '安全大冲顶';
-          //   shareImage = answerData.share_image || '';
-          //   if (answerData.total === answerData.count) {
-          //     setTimeout(function() {_this.setData({ showPage: 1 })}, 2000)
-          //   } else {
-          //     // 下一题
-          //     qsort ++;
-          //     setTimeout(function() { _this.nextQuestion() }, 2000);
-          //   }
-          // }
           _this.setData({
             answerData: answerData,
             qsort: qsort,
@@ -167,7 +152,6 @@ Page({
       
       success: ({data}) => {
         if (data.code === 0) {
-          console.log('questionData', data)
           _this.initItem(data.data);
           _this.setData({ 
             questionData: data.data,
@@ -200,6 +184,10 @@ Page({
         // 转发失败
       }
     }
+  },
+
+  getLifeCount: function() {
+
   }
 
 })

@@ -10,7 +10,6 @@ Page({
   onReady: function(){
 
     this.setData({ ruleData: app.globalData.ruleData })
-    console.log('*******  rulePage   *******', app, this.data.ruleData)
   },
   
   toIndexPage: function() {

@@ -1,5 +1,5 @@
 <view class="container">
-  <image class="i-sound" src="../../images/i-sound.png"></image>
+  <!-- <image class="i-sound" src="../../images/i-sound.png"></image> -->
   
   <image class="img-gift" src="../../images/img-gift.png"></image>
 

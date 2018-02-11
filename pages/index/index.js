@@ -22,9 +22,9 @@ Page({
   toExamPage: function() {
     var pathUrl; 
     var questionData = app.globalData.questionData;
-    if (questionData.life === 0 && !questionData.options) {
+    if (questionData.type === 1 || questionData.type === 3) {
       pathUrl = path.answerBeforePage;
-    } else {
+    } else if (questionData.type === 2) {} {
       pathUrl = path.answerPage;
     }
     wx.navigateTo({

@@ -5,11 +5,11 @@
   <view>
     <view class="life-txt"><image class="i-life" src="../../images/i-life.png"></image>生命值
     {{questionData.life}}</view>
-    <!-- <view class="clock-txt"><image class="i-clock" src="../../images/i-clock.png"></image>倒计时：{{time}}</view> -->
+    <view class="clock-txt"><image class="i-clock" src="../../images/i-clock.png"></image>倒计时：{{time}}</view>
   </view>
 
-  <image class="tip-img" src="../../images/tip-img0.png"></image>
-  <view class="tip-txt">邀请好友加入后，可以获得一次答题机会，仅限本场比赛。</view>
+  <image class="tip-img" src="{{questionData.image}}"></image> 
+  <view class="tip-txt">{{questionData.msg}}</view>
   <button class="btn invitation-btn" open-type="share">邀请</button>
 
   <image class="bg-img" src="../../images/img0.png"></image>
