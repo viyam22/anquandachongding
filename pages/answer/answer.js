@@ -17,34 +17,58 @@ Page({
     showTime: '',
     itemClass: [],    // 选项的Class
     getTime: null,     // 定时器
-    isShowPopup: false
+    isShowPopup: false,
+    duration: 0,       // 每题的限制时间
+    animationData: {}    // 定义动画
   },
 
   onLoad: function() {
     this.setData({ 
-      questionData: app.globalData.questionData
+      questionData: app.globalData.questionData,
+      duration: parseInt(app.globalData.questionData.duration) * 100
     })
     this.getTimeTip();
     this.initItem(this.data.questionData);
   },
 
+  scaleItem: function() {
+    console.log('888888')
+    var animation = wx.createAnimation({
+      duration: 1000,
+      timingFunction: 'ease',
+      transformOrigin: "50% 50%",
+      delay: 1000
+    })
+    animation.scale(2, 2).scale(1, 1).step();
+
+    this.setData({
+      animationData: animation.export()
+    })
+  },
+
   getTimeTip: function() {
     var _this = this;
-    var time = 0, showTime;
+    // _this.scaleItem();
+    var time = 0, showTime = '';
     var getTime = setInterval(function() {
+      if (_this.data.time === _this.data.duration - 10) {
+        clearInterval(_this.data.getTime);
+        _this.postAnswer();
+      }
       time ++;
-      showTime = time > 60 ? Math.floor(time / 60) + '分' + time % 60 + '秒' : time + '秒'
+      showTime = time > 100 ? Math.floor(time / 100) + '\'' + time % 100 : time;
       _this.setData({ 
         time: time,
         showTime: showTime
       })
-    }, 1000)
+    }, 10)
     _this.setData({ getTime: getTime });
   },
 
   initItem: function(data) {
     var _this = this;
     var itemClass = [];
+    var isMove = false;
 
     for(var i in data.options) {
       if (data.options.hasOwnProperty(i)) {
@@ -53,14 +77,17 @@ Page({
         } else if (data.isright === -1) {   // 答错
           if (data.answer === data.options[i]) {
             itemClass.push('item-wrong');
+            isMove = true;
           } else if (data.right == i) {
             itemClass.push('item-right');
+            isMove = true;
           } else {
             itemClass.push('item-default');
           }
         } else {
           if (data.answer === data.options[i]) {
             itemClass.push('item-right');
+            isMove = true;
           } else {
             itemClass.push('item-default');
           }
@@ -68,18 +95,24 @@ Page({
       }
     }
     _this.setData({ itemClass: itemClass })
+    if (isMove) {
+      // _this.scaleItem();
+    }
   },
 
   postAnswer: function(e) {
     var _this = this;
+    var answer = e ? e.target.dataset.answer : '0'
+    clearInterval(_this.data.getTime);
+    console.log('answer', answer)
     wx.request({
       url: config.requestBaseURL + api.getAnswer,
       data: {
         token: config.token,
         openid: app.globalData.openid,
         qid: _this.data.questionData.qid,
-        time: _this.data.time,
-        answer: e.target.dataset.answer,
+        time: _this.data.time * 10,
+        answer: answer,
         eid: _this.data.questionData.eid
       },
       
@@ -102,9 +135,9 @@ Page({
         // }}
         if (data.code === 0) {
           var answerData = data.data, shareImage = '', shareTitle = '', qsort = _this.data.qsort;
-          if (!answerData.options) {
+          // if (!answerData.options) {
             if (answerData.type === 3) {
-              // 答案正确
+              // 答题成功
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
@@ -114,20 +147,15 @@ Page({
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
-              setTimeout(function() {_this.setData({ showPage: 2 })}, config.showTipTime)
-            }
-          } else {
-            if (answerData.total === answerData.count) {
-              shareTitle = answerData.share_msg || '安全大冲顶';
-              shareImage = answerData.share_image || '';
-              setTimeout(function() {_this.setData({ showPage: 1 })}, config.showTipTime)
+              setTimeout(function() {_this.setData({ showPage: 2 })}, config.showTipTime);
+              // 邀请
             } else {
               // 下一题
               qsort ++;
               setTimeout(function() { _this.nextQuestion() }, config.showTipTime);
-              _this.initItem(answerData)
+              _this.initItem(answerData);
             }
-          }
+          // }
           _this.setData({
             answerData: answerData,
             qsort: qsort,
@@ -138,6 +166,36 @@ Page({
         }
       }
     });
+  },
+
+  getLife: function() {
+    var _this = this;
+    var getLiftInterval = setInterval(function() {
+      wx.request({
+        url: config.requestBaseURL + api.getQuestion,
+        data: {
+          token: config.token,
+          openid: app.globalData.openid,
+          
+        },
+        
+        success: ({data}) => {
+          if (data.code === 0 && data.data.life > 0) {
+            clearInterval(_this.data.getLiftInterval)
+            _this.setData({
+              isShowPopup: true
+            })
+            setTimeout(function() {
+              _this.setData({
+                isShowPopup: false
+              })
+              _this.nextQuestion();
+            })
+          }
+        }
+      });
+    }, 1000)
+    _this.setData({ getLiftInterval: getLiftInterval })
   },
 
   nextQuestion: function() {
@@ -153,10 +211,13 @@ Page({
       success: ({data}) => {
         if (data.code === 0) {
           _this.initItem(data.data);
+          _this.getTimeTip();
           _this.setData({ 
             questionData: data.data,
-            time: 0
+            time: 0,
+            duration: parseInt(data.data.duration) * 100
           })
+    console.log(_this.data.duration, _this.data.time)
         }
       }
     });
@@ -169,6 +230,7 @@ Page({
   },
 
   onShareAppMessage: function (res) {
+    var _this = this;
     if (res.from === 'button') {
       // 来自页面内转发按钮
       console.log(res.target)

@@ -6,14 +6,49 @@ Page({
   data: {
     questionData: null,
     lifeCount: 0,
-    time: 3
+    starttime: 0,
+    showTime: 0
   },
 
   onLoad: function() {
     this.setData({ 
-      questionData: app.globalData.questionData
+      questionData: app.globalData.questionData,
+      starttime: app.globalData.questionData.starttime
     })
+    this.getCountDown();
+
     // if (parseInt(this.data.questionData.life) !== 0) this.toAnswerPage();
+  },
+
+  getCountDown: function() {
+    var _this = this;
+    if (_this.data.starttime < 0) {
+      wx.navigateTo({
+        url: path.answerPage
+      })
+    } else {
+      var countDown = setInterval(function() {
+        if (_this.data.starttime === 0) {
+          clearInterval(countDown)
+          wx.navigateTo({
+            url: path.answerPage
+          })
+        } else {
+          var starttime = _this.data.starttime, showTime;
+          if (starttime > 3600) {
+            showTime = Math.floor(starttime / 3600) + '小时' + Math.floor((starttime % 3600) / 60) + '分' + starttime % 60 + '秒';
+          } else if (starttime < 3600 && starttime > 60) {
+            showTime = Math.floor(starttime / 60) + '分' + starttime % 60 + '秒';
+          } else {
+            showTime = starttime + '秒'
+          }
+          _this.setData({ 
+            starttime: starttime -1,
+            showTime: showTime
+          })
+        }
+      }, 1000)
+    }
   },
 
   onShareAppMessage: function (res) {
@@ -46,6 +81,8 @@ Page({
         _this.setData({ time: _this.data.time -1 })
       }
     }, 1000)
-  }
+  },
+
+
   
 })

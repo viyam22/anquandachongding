@@ -102,3 +102,22 @@ page {
 	position: absolute;
 	top: 148rpx;
 }
+.count-down {
+	width: 64rpx;
+	height: 64rpx;
+	border-radius: 50%;
+	border: 6rpx #72b1de solid;
+	text-align: center;
+	line-height: 64rpx;
+	color: #72b1de;
+	position: absolute;
+	top: 29rpx;
+	right: 28rpx;
+	background-color: #fff;
+	font-weight: bold;
+}
+.ad-img {
+	margin-top: 184rpx;
+	width: 100%;
+}
+
