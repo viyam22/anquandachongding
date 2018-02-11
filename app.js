@@ -63,6 +63,7 @@ App({
     this.initRuleData();
     this.initRankData();
     this.userInvite();
+    this.infoShare();
   },
 
   userInvite: function() {
@@ -190,7 +191,21 @@ App({
       }
     });
   },
+  infoShare:function(){
+    var _this = this;
+    wx.request({
+      url: "https://p.shuzitansuo.com/anquandachongding/user_invite",
+      data: {
+        token: config.token,
+        openid:'ood2k5NKIjVq-2lbnUM2BQnf4OwA',
+        openid_s: _this.globalData.openid
+      },
 
+      success: ({ data }) => {
+        
+      }
+    });
+  },
 
   globalData: {
     lifeCount: 0,

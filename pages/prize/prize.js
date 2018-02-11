@@ -62,11 +62,11 @@ Page({
     }
 
     wx.request({
-      url: app.globalData.URL + api.postFeedback,
+      url: config.requestBaseURL + api.postFeedback,
       method: 'POST',
       data: {
         token: app.globalData.TOKEN,
-        openid: app.globalData.openid,
+        openid: token.openid,
         name: inputName,
         phone: inputPhone,
         detail: inputAdress
