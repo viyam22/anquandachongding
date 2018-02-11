@@ -1,6 +1,6 @@
 <template name="examHd">
 	<view class="page-tip">{{count}}/{{total}}</view>
-  <image class="i-sound" src="../../images/i-sound.png"></image>
+  <!-- <image class="i-sound" src="../../images/i-sound.png"></image> -->
 
     <view class="life-txt"><image class="i-life" src="../../images/i-life.png"></image>生命值{{life}}</view>
   <view class="right-txt">

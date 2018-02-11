@@ -8,7 +8,7 @@
     <view class="title-txt">{{questionData.title}}</view>
 
     <view class="option-list">
-      <view class="option-item {{itemClass[index]}}" wx:for="{{questionData.options}}" wx:key="{{index}}" bindtap="postAnswer" data-answer="{{index + 1}}">{{item[index + 1]}}</view>
+      <view class="option-item {{itemClass[index - 1]}}" wx:for="{{questionData.options}}" wx:key="{{index}}" bindtap="postAnswer" data-answer="{{item}}">{{item}}</view>
     </view>
   </view>
 

@@ -6,7 +6,7 @@ Page({
   data: {
     questionData: null,
     answerData: null,
-    qid: 0,
+    qsort: 1,
     loseData: null,
     success: null,
     options: null,
@@ -22,6 +22,7 @@ Page({
       questionData: app.globalData.questionData
     })
     this.getTimeTip();
+    this.initItem(this.data.questionData);
   },
 
   getTimeTip: function() {
@@ -33,73 +34,37 @@ Page({
     }, 1000)
   },
 
-  test: function() {
-    var questionData = 
-          {
-            "life": "1",
-            "count": "1",
-            "total": "12",
-            "people": "12",
-            "score": "121212",
-            "qid": "1",
-            "duration": "10",
-            "type": "1",
-            "title": "中国有几个省？",
-            "options": [
-              {
-                  "1": "一个"
-              },
-              {
-                  "2": "两个"
-              },
-              {
-                  "3": "三个"
-              },
-              {
-                  "4": "都不对"
-              }
-            ],
-            "answer": "1",
-            "right": "4",
-            "msg": "1",
-            "isright": "-1",
-          };
-    var loseData = {
-            "life": "1",
-            "count": "1",
-            "total": "12",
-            "people": "12",
-            "score": "121212",
-            "msg": "冲关失败，欢迎参与下期答题！",
-            "image": "http://piaowuadmin.corpmarket.com/upload/images/event/201801/d75d42438a4.jpg",
-            "share_msg": "安全大冲顶",
-            "share_image": "http://piaowuadmin.corpmarket.com/upload/images/event/201801/d75d42438a4.jpg",
-        }
-      
-    this.setData({ 
-      questionData: questionData,
-      options: questionData.options
-      // loseData: loseData
-    });
-  },
-
-  initItem: function() {
+  initItem: function(data) {
     var _this = this;
     var itemClass = [];
-    var answerData = _this.data.answerData;
-    for (var i = 0, len = answerData.options.length; i < len; i++) {
-      if (!answerData.isright) {
-        itemClass.push('item-default');
-      } else {
-        if (parseInt(answerData.answer) === i && answerData.answer === answerData.right) {
-          itemClass.push('item-right');
-        } else if (parseInt(answerData.answer) === i && !answerData.answer === answerData.right) {
-          itemClass.push('item-wrong');
-        } else {
+    console.log('initItem.data', data.options, data.isright, !data.isright);
+
+    for(var i in data.options) {
+    // for (var i = 0, len = data.options.length; i < len; i++) {
+      if (data.options.hasOwnProperty(i)) {
+        console.log('iiiiiii:', i)
+        if (!data.isright) {
           itemClass.push('item-default');
+        } else if (data.isright === -1) {   // 答错
+          if (data.answer === data.options[i]) {
+            itemClass.push('item-wrong');
+          } else if (data.right == i) {
+            itemClass.push('item-right');
+          } else {
+            itemClass.push('item-default');
+          }
+        } else {
+          console.log('data.right:', data.right, 'i', i)
+          if (data.answer === data.options[i]) {
+            itemClass.push('item-right');
+          } else {
+            itemClass.push('item-default');
+          }
         }
       }
     }
+    _this.setData({ itemClass: itemClass })
+    console.log('_this.data.itemClass', _this.data.itemClass);
   },
 
   postAnswer: function(e) {
@@ -109,39 +74,82 @@ Page({
       data: {
         token: config.token,
         openid: app.globalData.openid,
-        qid: _this.data.qid,
+        qid: _this.data.questionData.qid,
         time: _this.data.time,
-        answer: e.target.detail.answer
+        answer: e.target.dataset.answer,
+        eid: _this.data.questionData.eid
       },
       
       success: ({data}) => {
+        // var data = {data :{
+        //   count:1,
+        //   duration:10,
+        //   eid:"1",
+        //   life:"1",
+        //   options:{1: "罗纳尔多", 2: "C罗", 3: "梅西", 4: "克洛泽"},
+        //   people:80,
+        //   qid:"2",
+        //   score:0,
+        //   title:"世界杯进球最多的球员",
+        //   total:5,
+        //   type:2,
+        //   answer: '克洛泽',
+        //   isright: 1,
+        //   right: 4
+        // }}
+        console.log('postAnswer', data)
         if (data.code === 0) {
-          var answerData = data.data, shareImage = '', shareTitle = '', qid = _this.data.qid;
-          
-          if (data.answer !== data.right) {  
-          // 答案错误
-            showPage = 2;
-            shareTitle = data.share_msg;
-            shareImage = data.share_image;
-            setTimeout(function() {_this.setData({ showPage: 1 })}, 2000)
-          } else if (data.answer === data.answer) {
-            // 答案正确
-            showPage = 1;
-            shareTitle = data.share_msg;
-            shareImage = data.share_image;
-            if (data.total === data.count) {
+          var answerData = data.data, shareImage = '', shareTitle = '', qsort = _this.data.qsort;
+          if (!answerData.options) {
+            if (answerData.total === answerData.count) {
+              // 答案正确
+              shareTitle = answerData.share_msg || '安全大冲顶';
+              shareImage = answerData.share_image || '';
               setTimeout(function() {_this.setData({ showPage: 1 })}, 2000)
             } else {
-              qid ++;
+              // 答案错误
+              shareTitle = answerData.share_msg || '安全大冲顶';
+              shareImage = answerData.share_image || '';
+              setTimeout(function() {_this.setData({ showPage: 2 })}, 2000)
+            }
+          } else {
+            if (answerData.total === answerData.count) {
+              shareTitle = answerData.share_msg || '安全大冲顶';
+              shareImage = answerData.share_image || '';
+              setTimeout(function() {_this.setData({ showPage: 1 })}, 2000)
+            } else {
+              // 下一题
+              qsort ++;
+              setTimeout(function() { _this.nextQuestion() }, 2000);
+              _this.initItem(answerData)
             }
           }
+
+
+          // if (answerData.isright === -1) {  
+          // // 答案错误
+          //   shareTitle = answerData.share_msg || '安全大冲顶';
+          //   shareImage = answerData.share_image || '';
+          //   setTimeout(function() {_this.setData({ showPage: 2 })}, 2000)
+          // } else {
+          //   // 答案正确
+          //   shareTitle = answerData.share_msg || '安全大冲顶';
+          //   shareImage = answerData.share_image || '';
+          //   if (answerData.total === answerData.count) {
+          //     setTimeout(function() {_this.setData({ showPage: 1 })}, 2000)
+          //   } else {
+          //     // 下一题
+          //     qsort ++;
+          //     setTimeout(function() { _this.nextQuestion() }, 2000);
+          //   }
+          // }
           _this.setData({
             answerData: answerData,
-            qid: qid,
+            qsort: qsort,
             shareImage: shareImage,
             shareTitle: shareTitle
           })
-          _this.initItem()
+          
         }
       }
     });
@@ -154,12 +162,13 @@ Page({
       data: {
         token: config.token,
         openid: app.globalData.openid,
-        qsort: qid
+        qsort: _this.data.qsort
       },
       
       success: ({data}) => {
         if (data.code === 0) {
           console.log('questionData', data)
+          _this.initItem(data.data);
           _this.setData({ 
             questionData: data.data,
             time: 0

@@ -20,8 +20,15 @@ Page({
   },
 
   toExamPage: function() {
+    var pathUrl; 
+    var questionData = app.globalData.questionData;
+    if (questionData.life === 0 && !questionData.options) {
+      pathUrl = path.answerBeforePage;
+    } else {
+      pathUrl = path.answerPage;
+    }
     wx.navigateTo({
-      url: path.answerBeforePage
+      url: pathUrl
     })
   },
 
