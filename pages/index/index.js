@@ -40,5 +40,29 @@ Page({
     wx.navigateTo({
       url: path.answerBeforePage
     })
+  },
+  openNewApp:function(){
+    var appid = config.newAppId;
+    if (!appid){
+      wx.showToast({
+        title: '暂未开放',
+        icon: "none",
+        duration: 2000
+      })
+      
+    }else{
+      wx.navigateToMiniProgram({
+        appId: appid,
+        path: '',
+        extraData: {
+          openid: app.globalData.openid
+        },
+        envVersion: 'release',
+        success(res) {
+          // 打开成功
+        }
+      })
+    };
+    
   }
 })

@@ -1,7 +1,7 @@
 {
   "pages": [
-    "pages/ad/ad",
     "pages/index/index",
+    "pages/ad/ad",
     "pages/prize/prize",
     "pages/answer/answer",
     "pages/my-rank/my-rank",

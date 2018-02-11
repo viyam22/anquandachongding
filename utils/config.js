@@ -1,7 +1,8 @@
 const config = {
 	requestBaseURL: 'https://p.shuzitansuo.com/anquandachongding',
 	token: 'f14cf4eca31dac45702e5b4a24975337',
-	indexAdTime: 3
+	indexAdTime: 3,
+  newAppId:''
 }
 
 const api = {

@@ -21,7 +21,7 @@
         <image class="i-rule" src="../../images/i-rule.png"></image>
         <view class="icon-txt">规则说明</view>
       </view>
-      <view class="box-s icon-box" bindtap="toSharePage">
+      <view class="box-s icon-box" bindtap="openNewApp">
         <image class="i-power" src="../../images/i-power.png"></image>
         <view class="icon-txt">获取能量</view>
       </view>
