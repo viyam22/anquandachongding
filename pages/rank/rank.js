@@ -25,6 +25,7 @@ Page({
     var len = _this.data.rankData || 2;
     var tagIndex = e ? parseInt(e.target.dataset.type) : _this.data.tagIndex;
     if (_this.data.rankData) {
+
       for (var i = 0; i < len; i++) {
         if (_this.data.rankData[i].type === 'friend' && tagIndex === 0) {
           showData = _this.data.rankData[i];
@@ -45,5 +46,11 @@ Page({
       url: pathUrl
     })
   },
+
+  toIndexPage: function() {
+    wx.navigateTo({
+      url: path.indexPage
+    })
+  }
   
 })

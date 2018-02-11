@@ -1,9 +1,11 @@
 const config = {
 	requestBaseURL: 'https://p.shuzitansuo.com/anquandachongding',
 	token: 'f14cf4eca31dac45702e5b4a24975337',
+  newAppId:'',
 	indexAdTime: 3,  // 广告页倒数时间，秒
 	showTipTime: 2000,  // 答题显示对错提示时间，毫秒
 	navigateTime: 2000,  // 提示后跳转页面的时间，毫秒
+
 }
 
 const api = {

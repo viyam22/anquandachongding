@@ -41,7 +41,6 @@ App({
 
   getOpenid: function() {
     var _this = this;
-
     // 缓存有openid则不再请求接口
     wx.getStorage({
       key: 'openid',
@@ -126,6 +125,7 @@ App({
         if (data.code === 0) {
           _this.globalData.indexData = data.data;
           _this.globalData.lifeCount = data.life;
+         
         }
       }
     });
@@ -170,7 +170,7 @@ App({
       }
     });
   },
-
+  
   initRuleData: function() {
     console.log('initRuleData')
     var _this = this;
@@ -189,8 +189,6 @@ App({
       }
     });
   },
-
-
   globalData: {
     lifeCount: 0,
     userInfo: null,
