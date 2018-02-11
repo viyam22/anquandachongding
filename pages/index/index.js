@@ -42,16 +42,33 @@ Page({
   },
 
   toExamPage: function() {
+    var _this = this;
     var pathUrl; 
-    var questionData = app.globalData.questionData;
-    if (questionData.type === 1 || questionData.type === 3) {
-      pathUrl = path.answerBeforePage;
-    } else if (questionData.type === 2) {
-      pathUrl = path.answerPage;
-    }
-    wx.navigateTo({
-      url: pathUrl
-    })
+
+    wx.request({
+      url: config.requestBaseURL + api.getQuestion,
+      data: {
+        token: config.token,
+        openid: app.globalData.openid,
+        
+      },
+      
+      success: ({data}) => {
+        if (data.code === 0) {
+          console.log('questionData', data.data)
+          app.globalData.questionData = data.data;
+          var questionData = data.data;
+          if (questionData.type === 1 || questionData.type === 3) {
+            pathUrl = path.answerBeforePage;
+          } else if (questionData.type === 2) {
+            pathUrl = path.answerPage;
+          }
+          wx.navigateTo({
+            url: pathUrl
+          })
+        }
+      }
+    });
   },
 
   toRankPage: function() {
@@ -92,6 +109,5 @@ Page({
         }
       })
     };
-    
-  }
+  },
 })
