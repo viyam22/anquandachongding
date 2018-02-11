@@ -1,9 +1,10 @@
 const { api, config, path } = require('utils/config.js');
 
 App({
-  onLaunch: function () {
+  onLaunch: function (res) {
     // 展示本地存储能力
     console.log('APP,config', config)
+    this.globalData.shareId = res.query.id || '0';
     // 登录
     wx.login({
       success: ({code}) => {
@@ -59,6 +60,25 @@ App({
     this.initQuestionData();
     this.initRuleData();
     this.initRankData();
+    this.userInvite();
+  },
+
+  userInvite: function() {
+    var _this = this;
+
+    if (!_this.globalData.shareId || _this.globalData.shareId == 0) return;
+    wx.request({
+      url: config.requestBaseURL + api.getUserInvite,
+      data: {
+        token: config.token,
+        openid_d: _this.globalData.openid,
+        openid_s: _this.globalData.shareId
+      },
+      
+      success: ({data}) => {
+        console.log('userInvite', data.data)
+      }
+    });
   },
 
   userLogin: function() {
@@ -179,5 +199,6 @@ App({
     ruleData: null,
     rankData: null,
     questionData: null,
+    shareId: null
   }
 })
