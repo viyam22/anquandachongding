@@ -65,18 +65,19 @@ Page({
       url: config.requestBaseURL + api.postFeedback,
       method: 'POST',
       data: {
-        token: app.globalData.TOKEN,
-        openid: token.openid,
+        token: config.token,
+        openid: app.globalData.openid,
         name: inputName,
         phone: inputPhone,
         detail: inputAdress
       },
       
       success: ({data}) => {
-        if (data.code === 0) {
+        console.log('---', data)
+        if (data.code !== 0) {
           wx.showToast({
-            title: title,
-            icon: '提交成功',
+            title: '提交成功',
+            icon: 'success',
             duration: 2000
           })
         } else {
@@ -86,6 +87,11 @@ Page({
             duration: 2000
           })
         }
+        setTimeout(function() {
+          wx.navigateTo({
+            url: path.rankPage
+          })
+        }, config.navigateTime)
       }
     });
   },

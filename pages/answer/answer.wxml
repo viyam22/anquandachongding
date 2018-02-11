@@ -1,14 +1,21 @@
 <import src="../../template/exam-hd.wxml"/>
 <view class="container">
-  <template is="examHd" data="{{...questionData}}"></template>
+  <view class="page-tip">{{questionData.count}}/{{questionData.total}}</view>
+
+    <view class="life-txt"><image class="i-life" src="../../images/i-life.png"></image>生命值{{questionData.life}}</view>
+  <view class="right-txt">
+    <view class="phone-txt"><image class="i-phone" src="../../images/i-phone.png"></image>当前在线人数：{{questionData.people}}</view>
+    <view class="clock-txt"><image class="i-clock" src="../../images/i-clock.png"></image>用时：{{showTime}}</view>
+  </view>
 
   <view class="examing" wx:if="{{showPage === 0}}">
-    <!-- <progress class="progress-class" percent="{{answerData.count / answerData.total * 100}}" color="#87a0ff" activeColor="#87a0ff" backgroundColor="#fff" active="true" active-mode="forwards" /> -->
-    <view class="progress-bar" style="width: {{questionData.count / questionData.total * 100 + '%'}}"></view>
+    <view class="progress-box">
+      <view class="progress-bar" style="width: {{questionData.count / questionData.total * 100 + '%'}}"></view>
+    </view>
     <view class="title-txt">{{questionData.title}}</view>
 
     <view class="option-list">
-      <view class="option-item {{itemClass[index]}}" wx:for="{{questionData.options}}" wx:key="{{index}}" bindtap="postAnswer" data-answer="{{index + 1}}">{{item[index + 1]}}</view>
+      <view class="option-item {{itemClass[index - 1]}}" wx:for="{{questionData.options}}" wx:key="{{index}}" bindtap="postAnswer" data-answer="{{item}}">{{item}}</view>
     </view>
   </view>
 
@@ -23,6 +30,13 @@
   <view class="lose" wx:if="{{showPage === 2}}">
     <image class="img-fail" src="../../images/img-fail.png"></image>
     <button class="btn invitation-btn" open-type="share">邀请</button>
+  </view>
+
+  <view class="popup" wx:if="{{isShowPopup}}">
+    <view class="popup-con">
+      <image src="../../images/relive.png"></image>
+      <view>复活成功,自动进入下一题</view>
+    </view>
   </view>
 
   <image class="bg-img" src="../../images/img0.png"></image>

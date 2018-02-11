@@ -1,15 +1,19 @@
 .container {
 	padding: 0 60rpx 0 80rpx;
 }
-.phone-txt {
-	
-	/*margin-right: 60rpx;*/
-	/*float: right;*/
-}
 .i-phone {
-	width: 17rpx;
+	width: 26rpx;
 	height: 26rpx;
-	margin-right: 17rpx;
+	margin-top: 10rpx;
+	margin-right: 10rpx;
+	display: block;
+	float: left;
+}
+.i-clock {
+	width: 26rpx;
+	height: 26rpx;
+	margin-top: 10rpx;
+	margin-right: 10rpx;
 	display: block;
 	float: left;
 }
@@ -18,7 +22,7 @@
 	text-align: left;
 	line-height: 46rpx;
 	font-size: 24rpx;
-	margin-top: 88rpx;
+	margin-top: 74rpx;
 }
 .progress-class {
 	width: 100%;
@@ -69,6 +73,7 @@
 .rank-btn {
 	float: right;
 	background-color: #a08fff;
+  	box-shadow: 0 15px 40px 0px rgba(206, 152, 255, 0.66);
 }
 .img-fail {
 	width: 319rpx;
@@ -94,3 +99,45 @@
 	box-sizing: border-box;
 	background-color: #87a0ff;
 }
+.progress-box {
+	box-shadow: 4rpx 6rpx 10rpx 6rpx rgba(182, 182, 182, 0.24);
+	background-color: #fff;
+	width: 100%;
+	height: 32rpx;
+	border-radius: 16rpx;
+}
+.popup {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.75);
+	z-index: 99;
+}
+.popup-con {
+	width: 463rpx;
+	height: 414rpx;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+.popup-con > image {
+	width: 463rpx;
+	height: 414rpx;
+	position: absolute;
+}
+.popup-con > view {
+	width: 350rpx;
+	padding: 0 30rpx;
+	box-sizing: border-box;
+	font-size: 28rpx;
+	color: #64a6ff;
+	text-align: center;
+	position: absolute;
+	top: 298rpx;
+	left: 50%;
+	transform: translateX(-50%);
+}
+

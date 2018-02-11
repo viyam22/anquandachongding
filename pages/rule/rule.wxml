@@ -13,4 +13,5 @@
   <view class="tip-txt"><text class="num">3</text>成绩优秀者可获得奖品</view> -->
 
   <view class="btn ok-btn" bindtap="toIndexPage">确定</view>
+  <image class="bg-img" src="../../images/img0.png"></image>
 </view>

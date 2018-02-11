@@ -131,6 +131,6 @@ page {
 .exchange-btn {
 	margin: 28rpx auto;
 }
-.ban-btn {
+.ban-btn { 
 	background-color: #434441!important;
 }

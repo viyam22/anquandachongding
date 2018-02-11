@@ -13,15 +13,13 @@ Page({
     this.setData({ 
       questionData: app.globalData.questionData
     })
-    console.log('-=-=-=-=-', this.data.questionData)
-    if (this.data.questionData.life !== 0) this.toAnswerPage();
+    // if (parseInt(this.data.questionData.life) !== 0) this.toAnswerPage();
   },
 
   onShareAppMessage: function (res) {
     var _this = this;
     if (res.from === 'button') {
       // 来自页面内转发按钮
-      console.log(res.target)
     }
     return {
       title: _this.data.questionData.share_msg,
