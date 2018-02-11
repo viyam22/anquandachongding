@@ -4,7 +4,7 @@
 
     <view class="tag-item item1 {{tagIndex === 1 ? 'item-selected' : 'item-default'}}" bindtap="toggleTag" data-type="1">世界排名</view>
   </view>
-
+<view wx:if="{{showData.list.length > 0}}">
   <view class="info">
     <view class="rank">{{showData.me[0].sort}}</view>
     <image class="avata-img" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
@@ -26,5 +26,10 @@
   </view>
 
   <view class="btn exchange-btn {{rankData.prize === -1 ? 'ban-btn' : ''}}" bindtap="{{rankData.prize === -1 ? '' : 'toPrizePage'}}" wx:if="{{tagIndex === 1}}">兑换奖品</view>
+ </view>
+ <view wx:else>
+      <image class="none_rank" src="../../images/none_rank.png"></image>
+ </view>
 </view>
+
 

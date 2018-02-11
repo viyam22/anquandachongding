@@ -41,7 +41,6 @@ App({
 
   getOpenid: function() {
     var _this = this;
-
     // 缓存有openid则不再请求接口
     wx.getStorage({
       key: 'openid',

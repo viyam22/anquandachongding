@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/ad/ad",
     "pages/index/index",
     "pages/prize/prize",
     "pages/answer/answer",
     "pages/answer-before/answer-before",
-    "pages/ad/ad",
     "pages/my-rank/my-rank",
     "pages/rule/rule",
     "pages/rank/rank",
