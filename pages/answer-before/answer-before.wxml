@@ -5,10 +5,21 @@
   <view>
     <view class="life-txt"><image class="i-life" src="../../images/i-life.png"></image>生命值
     {{questionData.life}}</view>
-    <view class="clock-txt"><image class="i-clock" src="../../images/i-clock.png"></image>倒计时：{{showTime}}</view>
+    <view class="clock-txt">
+
+    <view wx:if="{{showText==0}}">
+    <image class="i-clock" src="../../images/i-clock.png"></image>
+    倒计时：{{showTime}}
+    </view>
+    <view wx:if="{{showText==1}}">
+    {{starttime}}
+    </view>
+    </view>
+  </view>
+  <view class="tip-img-box">
+    <image class="tip-img" src="{{questionData.image}}"></image> 
   </view>
 
-  <image class="tip-img" src="{{questionData.image}}"></image> 
   <view class="tip-txt">{{questionData.msg}}</view>
   <button class="btn invitation-btn" open-type="share">邀请</button>
 

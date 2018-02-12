@@ -13,15 +13,18 @@ Page({
   onLoad: function() {
     var _this = this;
     this.toggleTag();
-
+    wx.showLoading({
+      title: '加载中...'
+    });
     wx.request({
       url: config.requestBaseURL + api.getRank,
       data: {
         token: config.token,
         openid: app.globalData.openid
       },
-      
+
       success: ({data}) => {
+        wx.hideLoading();
         if (data.code === 0) {
           console.log('rank', data.data)
           app.globalData.rankData = data.data;

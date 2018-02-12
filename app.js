@@ -1,11 +1,11 @@
 const { api, config, path } = require('utils/config.js');
 
 App({
-  
   onLaunch: function (res) {
  
     // 展示本地存储能力
-    this.globalData.shareId = res.query.id || '0';
+    this.globalData.shareId = res.query.openid_s || '0';
+
     // 登录
     wx.login({
       success: ({code}) => {
@@ -71,12 +71,12 @@ App({
       url: config.requestBaseURL + api.getUserInvite,
       data: {
         token: config.token,
-        openid_d: _this.globalData.openid,
+        openid: _this.globalData.openid,
         openid_s: _this.globalData.shareId
       },
       
       success: ({data}) => {
-        console.log('userInvite', data.data)
+        console.log('userInvite', data.msg)
       }
     });
   },

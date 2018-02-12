@@ -44,10 +44,13 @@
 .container {
 	padding: 0 60rpx 0 80rpx;
 }
+.tip-img-box{
+  padding-top:130rpx; 
+}
 .tip-img {
 	width: 464rpx;
 	height: 350rpx;
-	margin: 285rpx auto 0;
+	margin:0  auto;
 	display: block;
 }
 .tip-txt {

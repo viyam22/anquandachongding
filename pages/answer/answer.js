@@ -17,32 +17,41 @@ Page({
     showTime: '',
     itemClass: [],    // 选项的Class
     getTime: null,     // 定时器
+    musis:null,
     isShowPopup: false,
     popupTxt: '',
     duration: 0,       // 每题的限制时间
     animationData: {},    // 定义动画
-    isLock: false
+    isLock: false,
+    showTime2:'',
+    fail:'../../images/img-fail.png'
   },
 
   onLoad: function() {
     var _this = this;
-    _this.setMusic();
+    // _this.setMusic();
+
+    wx.showLoading({
+      title: '加载中...'
+    });
     wx.request({
       url: config.requestBaseURL + api.getQuestion,
       data: {
         token: config.token,
         openid: app.globalData.openid,
       },
-      
       success: ({data}) => {
         if (data.code === 0) {
           console.log('questionData', data.data)
           app.globalData.questionData = data.data;
           _this.setData({ 
             questionData: app.globalData.questionData,
-            duration: parseInt(app.globalData.questionData.duration) * 100
+            duration: parseInt(app.globalData.questionData.duration) * 100,
+            score: app.globalData.questionData.score
           })
+          wx.hideLoading();
           _this.getTimeTip();
+        
           _this.initItem(this.data.questionData);
         }
       }
@@ -67,6 +76,10 @@ Page({
   getTimeTip: function() {
     var _this = this;
     // _this.scaleItem();
+    var showTime2 = _this.data.score;
+    _this.setData({
+      showTime2: showTime2
+    })
     var time = 0, showTime = '';
     var getTime = setInterval(function() {
       if (_this.data.time === _this.data.duration - 10) {
@@ -80,6 +93,8 @@ Page({
         showTime: showTime
       })
     }, 10)
+    
+  
     _this.setData({ getTime: getTime });
   },
 
@@ -87,7 +102,6 @@ Page({
     var _this = this;
     var itemClass = [];
     var isMove = false;
-
     for(var i in data.options) {
       if (data.options.hasOwnProperty(i)) {
         if (!data.isright) {
@@ -124,23 +138,26 @@ Page({
 
     var itemClass = _this.data.itemClass;
     if (e) {
-      itemClass[parseInt(e.target.dataset.index)] = 'item-right'
+      var index = (e.target.dataset.index)-1;
+      itemClass[parseInt(index)] = 'item-right'
     }
     _this.setData({ 
       isLock: true,
       itemClass: itemClass
     })
-
-    var answer = e ? e.target.dataset.answer : '0'
+   
+    var answer = e ? e.target.dataset.index : '0'
     clearInterval(_this.data.getTime);
     console.log('answer', answer)
+    var time = _this.data.time * 10;
+  
     wx.request({
       url: config.requestBaseURL + api.getAnswer,
       data: {
         token: config.token,
         openid: app.globalData.openid,
         qid: _this.data.questionData.qid,
-        time: _this.data.time * 10,
+        time: time ,
         answer: answer,
         eid: _this.data.questionData.eid
       },
@@ -151,16 +168,26 @@ Page({
           // if (!answerData.options) {
             if (answerData.type === 3) {
               // 答题成功
+            
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
               setTimeout(function() {_this.setData({ showPage: 1 })}, config.showTipTime)
+              
             } else if (answerData.type === 4) {
               // 答案错误
+          
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
-              setTimeout(function() {_this.setData({ showPage: 2 })}, config.showTipTime);
+              setTimeout(function() {
+                _this.setMusic('http://huiya-video.hengdikeji.com/error.mp3');
+                _this.setData({ 
+                  showPage: 2 ,
+                  fail: answerData.image
+                  });
+                }, config.showTipTime);
+     
               // 邀请
             } else {
               // 下一题
@@ -169,6 +196,7 @@ Page({
                 isShowPopup: true,
                 popupTxt: answerData.msg
               })
+              _this.setMusic('http://huiya-video.hengdikeji.com/right.mp3');
               setTimeout(function() { 
                 _this.nextQuestion();
               }, 500);
@@ -221,6 +249,9 @@ Page({
 
   nextQuestion: function() {
     var _this = this;
+    wx.showLoading({
+      title: '加载中...'
+    });
     wx.request({
       url: config.requestBaseURL + api.getQuestion,
       data: {
@@ -230,6 +261,7 @@ Page({
       },
       
       success: ({data}) => {
+        wx.hideLoading();
         if (data.code === 0) {
           _this.initItem(data.data);
           _this.getTimeTip();
@@ -237,6 +269,7 @@ Page({
             questionData: data.data,
             time: 0,
             duration: parseInt(data.data.duration) * 100,
+            score: data.data.score,
             isShowPopup: false
           })
         }
@@ -257,9 +290,9 @@ Page({
       console.log(res.target)
     }
     return {
-      title: _this.questionData.share_msg,
-      imageUrl: _this.questionData.share_image,
-      path: '/pages/index?openid_s=' + app.globalData.openid,
+      title: _this.shareTitle,
+      imageUrl: _this.shareImage,
+      path: '/pages/index/index?openid_s=' + app.globalData.openid,
       success: function(res) {
         // 转发成功
       },
@@ -269,12 +302,17 @@ Page({
     }
   },
 
-  setMusic: function() {
+  setMusic: function(mp3) {
+    //成功mp3:http://huiya-video.hengdikeji.com/right.mp3
+    //失败mp3:http://huiya-video.hengdikeji.com/error.mp3
     wx.playBackgroundAudio({
-        dataUrl: '../../audio/lose.mp3',
+        dataUrl: mp3,
         title: 'music',
         coverImgUrl: ''
     })
+    setTimeout(function(){
+      wx.stopBackgroundAudio()
+    },1100);
   }
 
 

@@ -8,25 +8,31 @@ Page({
     openid:[],
     indexData: [],    // 首页数据
     showPageType: -1,
-    time: 0
+    time: 3,
+    adImgClass:{}
   },
 
   onShow: function() {
     var _this = this;
     var showPageType;
+    wx.showLoading({
+      title: '加载中...'
+    });
     var getApi = setInterval(function() {
       if (app.globalData.indexData) {
         _this.setData({ indexData: app.globalData.indexData })
         clearInterval(getApi);
-        if (!_this.data.indexData.ad) {
+        if (!_this.data.indexData.ad || _this.data.time==0) {
           showPageType = 0;
+          wx.hideLoading();
         } else {
           showPageType = 1;
+          wx.hideLoading();
           _this.toIndexPage();
         }
         _this.setData({ showPageType: showPageType })
       }
-    }, 500);
+    }, 200);
   },
 
   toIndexPage: function() {
@@ -44,15 +50,15 @@ Page({
   toExamPage: function() {
     var _this = this;
     var pathUrl; 
-
+    wx.showLoading({
+      title:'加载中...'
+    });
     wx.request({
       url: config.requestBaseURL + api.getQuestion,
       data: {
         token: config.token,
         openid: app.globalData.openid,
-        
       },
-      
       success: ({data}) => {
         if (data.code === 0) {
           console.log('questionData', data.data)
@@ -64,7 +70,10 @@ Page({
             pathUrl = path.answerPage;
           }
           wx.navigateTo({
-            url: pathUrl
+            url: pathUrl,
+            complete:function(){
+              wx.hideLoading();
+            }
           })
         }
       }
@@ -72,14 +81,27 @@ Page({
   },
 
   toRankPage: function() {
+    wx.showLoading({
+      title: '加载中...'
+    });
     wx.navigateTo({
-      url: path.rankPage
+      url: path.rankPage,
+      complete: function () {
+        wx.hideLoading();
+      }
     })
+
   },
 
   toRulePage: function() {
+    wx.showLoading({
+      title: '加载中...'
+    });
     wx.navigateTo({
-      url: path.rulePage
+      url: path.rulePage,
+      complete: function () {
+        wx.hideLoading();
+      }
     })
   },
   toSharePage:function(){

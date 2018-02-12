@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/ad/ad",
     "pages/index/index",
     "pages/prize/prize",
     "pages/answer/answer",

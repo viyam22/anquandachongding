@@ -4,7 +4,7 @@
     <view class="life-txt"><image class="i-life" src="../../images/i-life.png"></image>生命值{{questionData.life}}</view>
   <view class="right-txt">
     <view class="phone-txt"><image class="i-phone" src="../../images/i-phone.png"></image>当前在线人数：{{questionData.people}}</view>
-    <view class="clock-txt"><image class="i-clock" src="../../images/i-clock.png"></image>用时：{{showTime}}</view>
+    <view class="clock-txt"><image class="i-clock" src="../../images/i-clock.png"></image>用时：{{showTime2}}</view>
   </view>
 
   <view class="examing" wx:if="{{showPage === 0}}">
@@ -14,7 +14,7 @@
     <view class="title-txt">{{questionData.title}}</view>
 
     <view class="option-list">
-      <view class="option-item {{itemClass[index - 1]}}" wx:for="{{questionData.options}}" wx:key="{{index}}" bindtap="postAnswer" data-answer="{{item}}" animation="{{animationData}}" data-index="{{index - 1}}">{{item}}</view>
+      <view class="option-item {{itemClass[index - 1]}}" wx:for="{{questionData.options}}" wx:key="{{index}}" bindtap="postAnswer" data-answer="{{item}}" animation="{{animationData}}" data-index="{{index}}">{{item}}</view>
     </view>
   </view>
 
@@ -27,14 +27,16 @@
   </view>
 
   <view class="lose" wx:if="{{showPage === 2}}">
-    <image class="img-fail" src="../../images/img-fail.png"></image>
+  <!--../../images/img-fail.png-->
+    <image class="img-fail" src="{{fail}}"></image>
     <button class="btn invitation-btn" open-type="share">邀请</button>
   </view>
 
   <view class="popup" wx:if="{{isShowPopup}}">
     <view class="popup-con">
       <image src="../../images/relive.png"></image>
-      <view>{{popupTxt}}</view>
+      <view class="v1">{{popupTxt}}</view>
+      <view class="v2">自动进入下一题</view>
     </view>
   </view>
 

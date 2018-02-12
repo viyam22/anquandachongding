@@ -7,13 +7,15 @@ Page({
     questionData: null,
     lifeCount: 0,
     starttime: 0,
-    showTime: 0
+    showTime: 0,
+    showText:0,
   },
 
   onLoad: function() {
     this.setData({ 
       questionData: app.globalData.questionData,
-      starttime: app.globalData.questionData.starttime
+      starttime: app.globalData.questionData.starttime,
+      type: app.globalData.questionData.type
     })
     this.getCountDown();
 
@@ -22,7 +24,13 @@ Page({
 
   getCountDown: function() {
     var _this = this;
-    if (_this.data.type === 1 || _this.data.type === 3) return;
+   
+    if (_this.data.type === 3){
+      _this.setData({
+        showText:1
+      })
+      return;
+    }
     if (_this.data.starttime < 0) {
       wx.navigateTo({
         url: path.answerPage
@@ -43,6 +51,7 @@ Page({
           } else {
             showTime = starttime + '秒'
           }
+          
           _this.setData({ 
             starttime: starttime -1,
             showTime: showTime
@@ -60,9 +69,10 @@ Page({
     return {
       title: _this.data.questionData.share_msg,
       imageUrl: _this.data.questionData.share_image,
-      path: '/pages/index?openid_s=' + app.globalData.openid,
+      path: '/pages/index/index?openid_s=' + app.globalData.openid,
       success: function(res) {
         // 转发成功
+        console.log(res);
       },
       fail: function(res) {
         // 转发失败

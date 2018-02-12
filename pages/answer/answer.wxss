@@ -131,7 +131,7 @@
 	height: 414rpx;
 	position: absolute;
 }
-.popup-con > view {
+.popup-con .v1 {
 	width: 350rpx;
 	padding: 0 30rpx;
 	box-sizing: border-box;
@@ -140,6 +140,18 @@
 	text-align: center;
 	position: absolute;
 	top: 298rpx;
+	left: 50%;
+	transform: translateX(-50%);
+}
+.popup-con .v2 {
+	width: 350rpx;
+	padding: 0 30rpx;
+	box-sizing: border-box;
+	font-size: 28rpx;
+	color: #64a6ff;
+	text-align: center;
+	position: absolute;
+	top: 328rpx;
 	left: 50%;
 	transform: translateX(-50%);
 }
