@@ -46,5 +46,11 @@ Page({
       url: pathUrl
     })
   },
+
+  toIndexPage: function() {
+    wx.navigateTo({
+      url: path.indexPage
+    })
+  }
   
 })

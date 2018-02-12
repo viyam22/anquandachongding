@@ -29,6 +29,8 @@
  </view>
  <view wx:else>
       <image class="none_rank" src="../../images/none_rank.png"></image>
+      <!-- <view class="none_rank_txt">排行榜还在统计中</view> -->
+      <view class="btn sure-btn" bindtap="toIndexPage" >确定</view>
  </view>
 </view>
 

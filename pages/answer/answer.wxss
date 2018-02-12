@@ -99,6 +99,9 @@
 	box-sizing: border-box;
 	background-color: #87a0ff;
 }
+.progress-dange {
+	background-color: #fd0707!important;
+}
 .progress-box {
 	box-shadow: 4rpx 6rpx 10rpx 6rpx rgba(182, 182, 182, 0.24);
 	background-color: #fff;

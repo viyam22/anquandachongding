@@ -5,7 +5,7 @@
   <view>
     <view class="life-txt"><image class="i-life" src="../../images/i-life.png"></image>生命值
     {{questionData.life}}</view>
-    <view class="clock-txt"><image class="i-clock" src="../../images/i-clock.png"></image>倒计时：{{time}}</view>
+    <view class="clock-txt"><image class="i-clock" src="../../images/i-clock.png"></image>倒计时：{{showTime}}</view>
   </view>
 
   <image class="tip-img" src="{{questionData.image}}"></image> 

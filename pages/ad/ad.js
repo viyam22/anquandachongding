@@ -20,6 +20,7 @@ Page({
           time: config.indexAdTime
         })
         clearInterval(getApi);
+        console.log('====', !_this.data.indexData.ad)
         if (!_this.data.indexData.ad) {
           wx.navigateTo({
             url: path.indexPage
