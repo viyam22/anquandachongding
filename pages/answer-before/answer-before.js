@@ -22,6 +22,7 @@ Page({
 
   getCountDown: function() {
     var _this = this;
+    if (_this.data.type === 1 || _this.data.type === 3) return;
     if (_this.data.starttime < 0) {
       wx.navigateTo({
         url: path.answerPage

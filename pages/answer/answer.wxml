@@ -14,7 +14,7 @@
     <view class="title-txt">{{questionData.title}}</view>
 
     <view class="option-list">
-      <view class="option-item {{itemClass[index - 1]}}" wx:for="{{questionData.options}}" wx:key="{{index}}" bindtap="postAnswer" data-answer="{{item}}" animation="{{animationData}}">{{item}}</view>
+      <view class="option-item {{itemClass[index - 1]}}" wx:for="{{questionData.options}}" wx:key="{{index}}" bindtap="postAnswer" data-answer="{{item}}" animation="{{animationData}}" data-index="{{index - 1}}">{{item}}</view>
     </view>
   </view>
 
@@ -34,10 +34,12 @@
   <view class="popup" wx:if="{{isShowPopup}}">
     <view class="popup-con">
       <image src="../../images/relive.png"></image>
-      <view>复活成功,自动进入下一题</view>
+      <view>{{popupTxt}}</view>
     </view>
   </view>
 
   <image class="bg-img" src="../../images/img0.png"></image>
+
+  <audio poster="{{poster}}" name="{{name}}" author="{{author}}" src="{{src}}" id="myAudio" controls loop></audio>
 
 </view>

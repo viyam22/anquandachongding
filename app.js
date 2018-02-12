@@ -57,9 +57,9 @@ App({
   // 执行各页面的接口访问
   initFun: function() {
     this.initIndexData();
-    this.initQuestionData();
-    this.initRuleData();
-    this.initRankData();
+    // this.initQuestionData();
+    // this.initRuleData();
+    // this.initRankData();
     this.userInvite();
   },
 

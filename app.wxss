@@ -48,3 +48,6 @@
 	display: block;
 	float: left;
 }
+audio {
+	display: none;
+}

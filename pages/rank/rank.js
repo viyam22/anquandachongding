@@ -11,12 +11,27 @@ Page({
   },
   
   onLoad: function() {
+    var _this = this;
     this.toggleTag();
-    this.setData({ 
-      rankData: app.globalData.rankData,
-      userInfo: app.globalData.userInfo 
-    })
 
+    wx.request({
+      url: config.requestBaseURL + api.getRank,
+      data: {
+        token: config.token,
+        openid: app.globalData.openid
+      },
+      
+      success: ({data}) => {
+        if (data.code === 0) {
+          console.log('rank', data.data)
+          app.globalData.rankData = data.data;
+          this.setData({ 
+            rankData: app.globalData.rankData,
+            userInfo: app.globalData.userInfo 
+          })
+        }
+      }
+    });
   },
 
   toggleTag: function(e) {

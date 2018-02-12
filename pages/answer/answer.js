@@ -18,17 +18,35 @@ Page({
     itemClass: [],    // 选项的Class
     getTime: null,     // 定时器
     isShowPopup: false,
+    popupTxt: '',
     duration: 0,       // 每题的限制时间
-    animationData: {}    // 定义动画
+    animationData: {},    // 定义动画
+    isLock: false
   },
 
   onLoad: function() {
-    this.setData({ 
-      questionData: app.globalData.questionData,
-      duration: parseInt(app.globalData.questionData.duration) * 100
-    })
-    this.getTimeTip();
-    this.initItem(this.data.questionData);
+    var _this = this;
+    _this.setMusic();
+    wx.request({
+      url: config.requestBaseURL + api.getQuestion,
+      data: {
+        token: config.token,
+        openid: app.globalData.openid,
+      },
+      
+      success: ({data}) => {
+        if (data.code === 0) {
+          console.log('questionData', data.data)
+          app.globalData.questionData = data.data;
+          _this.setData({ 
+            questionData: app.globalData.questionData,
+            duration: parseInt(app.globalData.questionData.duration) * 100
+          })
+          _this.getTimeTip();
+          _this.initItem(this.data.questionData);
+        }
+      }
+    });
   },
 
   scaleItem: function() {
@@ -102,6 +120,17 @@ Page({
 
   postAnswer: function(e) {
     var _this = this;
+    if (_this.data.isLock) return;
+
+    var itemClass = _this.data.itemClass;
+    if (e) {
+      itemClass[parseInt(e.target.dataset.index)] = 'item-right'
+    }
+    _this.setData({ 
+      isLock: true,
+      itemClass: itemClass
+    })
+
     var answer = e ? e.target.dataset.answer : '0'
     clearInterval(_this.data.getTime);
     console.log('answer', answer)
@@ -117,22 +146,6 @@ Page({
       },
       
       success: ({data}) => {
-        // var data = {data :{
-        //   count:1,
-        //   duration:10,
-        //   eid:"1",
-        //   life:"1",
-        //   options:{1: "罗纳尔多", 2: "C罗", 3: "梅西", 4: "克洛泽"},
-        //   people:80,
-        //   qid:"2",
-        //   score:0,
-        //   title:"世界杯进球最多的球员",
-        //   total:5,
-        //   type:2,
-        //   answer: '克洛泽',
-        //   isright: 1,
-        //   right: 4
-        // }}
         if (data.code === 0) {
           var answerData = data.data, shareImage = '', shareTitle = '', qsort = _this.data.qsort;
           // if (!answerData.options) {
@@ -152,7 +165,13 @@ Page({
             } else {
               // 下一题
               qsort ++;
-              setTimeout(function() { _this.nextQuestion() }, config.showTipTime);
+              _this.setData({ 
+                isShowPopup: true,
+                popupTxt: answerData.msg
+              })
+              setTimeout(function() { 
+                _this.nextQuestion();
+              }, 500);
               _this.initItem(answerData);
             }
           // }
@@ -160,7 +179,8 @@ Page({
             answerData: answerData,
             qsort: qsort,
             shareImage: shareImage,
-            shareTitle: shareTitle
+            shareTitle: shareTitle,
+            isLock:false
           })
           
         }
@@ -183,7 +203,8 @@ Page({
           if (data.code === 0 && data.data.life > 0) {
             clearInterval(_this.data.getLiftInterval)
             _this.setData({
-              isShowPopup: true
+              isShowPopup: true,
+              popupTxt: '复活成功,自动进入下一题'
             })
             setTimeout(function() {
               _this.setData({
@@ -215,9 +236,9 @@ Page({
           _this.setData({ 
             questionData: data.data,
             time: 0,
-            duration: parseInt(data.data.duration) * 100
+            duration: parseInt(data.data.duration) * 100,
+            isShowPopup: false
           })
-    console.log(_this.data.duration, _this.data.time)
         }
       }
     });
@@ -248,8 +269,13 @@ Page({
     }
   },
 
-  getLifeCount: function() {
-
+  setMusic: function() {
+    wx.playBackgroundAudio({
+        dataUrl: '../../audio/lose.mp3',
+        title: 'music',
+        coverImgUrl: ''
+    })
   }
+
 
 })
