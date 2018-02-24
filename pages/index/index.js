@@ -14,10 +14,24 @@ Page({
 
   onShow: function() {
     var _this = this;
+ 
+    var has=setInterval(function(){
+    
+      if (!app.globalData.openid){
+        return;
+      }else{
+        clearInterval(has);
+        _this.initIndexData();
+      }
+    },500)
+
+
     var showPageType;
     wx.showLoading({
       title: '加载中...'
     });
+
+
     var getApi = setInterval(function() {
       if (app.globalData.indexData) {
         _this.setData({ indexData: app.globalData.indexData })
@@ -34,7 +48,27 @@ Page({
       }
     }, 200);
   },
+  // 获取首页数据
+  initIndexData: function () {
+    var _this = this;
+    console.log(111);
+    wx.request({
+      url: config.requestBaseURL + api.getIndex,
+      data: {
+        token: config.token,
+        openid: app.globalData.openid
+      },
 
+      success: ({ data }) => {
+        console.log('index', data.data)
+        if (data.code === 0) {
+          app.globalData.indexData = data.data;
+          app.globalData.lifeCount = data.life;
+
+        }
+      }
+    });
+  },
   toIndexPage: function() {
     var _this = this;
     var countDown = setInterval(function() {

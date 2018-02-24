@@ -56,7 +56,7 @@ App({
 
   // 执行各页面的接口访问
   initFun: function() {
-    this.initIndexData();
+    // this.initIndexData();
     // this.initQuestionData();
     // this.initRuleData();
     // this.initRankData();
@@ -110,26 +110,7 @@ App({
     });
   },
 
-  // 获取首页数据
-  initIndexData: function() {
-    var _this = this;
-    wx.request({
-      url: config.requestBaseURL + api.getIndex,
-      data: {
-        token: config.token,
-        openid: _this.globalData.openid
-      },
-      
-      success: ({data}) => {
-        console.log('index', data.data)
-        if (data.code === 0) {
-          _this.globalData.indexData = data.data;
-          _this.globalData.lifeCount = data.life;
-         
-        }
-      }
-    });
-  },
+ 
 
   initQuestionData: function() {
     console.log('initQuestionData')

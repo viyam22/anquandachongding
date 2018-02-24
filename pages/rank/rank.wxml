@@ -6,17 +6,17 @@
   </view>
 <view wx:if="{{showData.list.length > 0}}">
   <view class="info">
-    <view class="rank">{{showData.me[0].sort}}</view>
+    <view class="rank">{{showData.me.sort}}</view>
     <image class="avata-img" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
     <view class="txt-box">
       <view class="nickname">{{userInfo.nickName}}</view>
-      <view class="time">{{showData.me[0].score}}</view>
+      <view class="time">{{showData.me.score}}</view>
     </view>
   </view>
 
   <view class="rank-lists" wx:if="{{showData.list.length > 0}}">
     <view class="rank-item rank-item-border" wx:for="{{showData.list}}" wx:key="{{item.type}}">
-      <view class="rank">{{index}}</view>
+      <view class="rank">{{index + 1}}</view>
       <image class="avata-img" src="{{item.avataUrl}}" background-size="cover"></image>
       <view class="txt-box">
         <view class="nickname">{{item.nickname}}</view>
@@ -27,8 +27,12 @@
 
   <view class="btn exchange-btn {{rankData.prize === -1 ? 'ban-btn' : ''}}" bindtap="{{rankData.prize === -1 ? '' : 'toPrizePage'}}" wx:if="{{tagIndex === 1}}">兑换奖品</view>
  </view>
- <view wx:else>
-      <image class="none_rank" src="../../images/none_rank.png"></image>
+ <view class="none_rank_box" wx:else>
+     <view class="clock-txt">
+      <image class="i-clock" src="../../images/i-clock.png"></image>
+      倒计时：{{showTime}}
+      </view>
+      <image class="none_rank" mode='widthFix' src="{{image}}" style='margin-top:30rpx;'></image>
       <!-- <view class="none_rank_txt">排行榜还在统计中</view> -->
       <view class="btn sure-btn" bindtap="toIndexPage" >确定</view>
  </view>

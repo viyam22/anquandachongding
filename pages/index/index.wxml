@@ -6,7 +6,12 @@
       </swiper-item>
     </block>
   </swiper>
+  <!--在首页预先加载完gif图-->
+  <view style='display:none;'>
+    <image src="../../images/amit.gif"></image>
+  </view>
 
+  <!--在首页预先加载完gif图end-->
   <view class="container">
     <view class="box-l box-answer" bindtap="toExamPage">
       <image class="i-answer" src="../../images/i-answer.png"></image>

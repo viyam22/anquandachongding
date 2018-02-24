@@ -45,7 +45,7 @@
 	padding: 0 60rpx 0 80rpx;
 }
 .tip-img-box{
-  padding-top:130rpx; 
+  padding-top:180rpx; 
 }
 .tip-img {
 	width: 464rpx;

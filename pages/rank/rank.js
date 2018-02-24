@@ -7,7 +7,10 @@ Page({
     userInfo: [],    // 用户信息
     rankData: [],    // 储存接口中的排行数据
     showData: [],    // 展示数据
-    tagIndex: 0
+    tagIndex: 0,
+    image:'',
+    showTime:'计算中',
+    starttime:'',
   },
   
   onLoad: function() {
@@ -30,8 +33,43 @@ Page({
           app.globalData.rankData = data.data;
           this.setData({ 
             rankData: app.globalData.rankData,
-            userInfo: app.globalData.userInfo 
+            userInfo: app.globalData.userInfo ,
+            showData: app.globalData.rankData.friend
           })
+  
+          if(data.data.type==2){
+            var starttime = data.data.starttime;
+            this.setData({
+              starttime: starttime,
+            })
+            var d=setInterval(function(){
+
+              if (_this.data.starttime === 0) {
+                clearInterval(d)
+                // wx.navigateTo({
+                //   url: path.rulePage
+                // })
+              } else {
+                var starttime = _this.data.starttime, showTime;
+                if (starttime > 3600) {
+                  showTime = Math.floor(starttime / 3600) + '小时' + Math.floor((starttime % 3600) / 60) + '分' + starttime % 60 + '秒';
+                } else if (starttime < 3600 && starttime > 60) {
+                  showTime = Math.floor(starttime / 60) + '分' + starttime % 60 + '秒';
+                } else {
+                  showTime = starttime + '秒'
+                }
+                _this.setData({
+                  showTime: showTime,
+                  starttime: starttime-1
+                })
+              }
+           
+            },1000)
+           
+            _this.setData({
+              image: data.data.image,
+            })
+          }
         }
       }
     });
@@ -42,15 +80,10 @@ Page({
     var showData = [];
     var len = _this.data.rankData || 2;
     var tagIndex = e ? parseInt(e.target.dataset.type) : _this.data.tagIndex;
-    if (_this.data.rankData) {
-
-      for (var i = 0; i < len; i++) {
-        if (_this.data.rankData[i].type === 'friend' && tagIndex === 0) {
-          showData = _this.data.rankData[i];
-        } else if (_this.data.rankData[i].type === 'world' && tagIndex === 1) {
-          showData = _this.data.rankData[i];
-        } 
-      }
+    if (tagIndex === 0){
+      showData = _this.data.rankData.friend;
+    }else{
+      showData = _this.data.rankData.world;
     }
     _this.setData({ 
       tagIndex: tagIndex,

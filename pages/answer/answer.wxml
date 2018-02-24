@@ -17,9 +17,11 @@
       <view class="option-item {{itemClass[index - 1]}}" wx:for="{{questionData.options}}" wx:key="{{index}}" bindtap="postAnswer" data-answer="{{item}}" animation="{{animationData}}" data-index="{{index}}">{{item}}</view>
     </view>
   </view>
-
+  
   <view class="finish" wx:if="{{showPage === 1}}">
-    <image class="i-cup" src="../../images/i-cup.png"></image>
+   <image src="../../images/amit.gif" class="amit" style="display:{{showAmit}}" mode="widthFix"></image>
+   <image class="i-cup" src="../../images/i-cup.png"></image>
+
     <view class="btn-box">
       <button class="btn share-btn" open-type="share">分享结果</button>
       <view class="btn rank-btn" bindtap="toRankPage">排行榜</view>

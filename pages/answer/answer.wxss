@@ -75,11 +75,15 @@
 	background-color: #a08fff;
   	box-shadow: 0 15px 40px 0px rgba(206, 152, 255, 0.66);
 }
+.lose{
+  padding-top: 280rpx;
+}
 .img-fail {
-	width: 319rpx;
-	height: 476rpx;
+	 width: auto; 
+	 height: 476rpx; 
 	display: block;
-	margin: 280rpx auto 0;
+  margin: 0 auto;
+	/* margin: 280rpx auto 0; */
 }
 .invitation-btn {
 	margin: 46rpx auto 0;
@@ -154,5 +158,16 @@
 	top: 328rpx;
 	left: 50%;
 	transform: translateX(-50%);
+}
+.finish{
+  position: relative;
+}
+.amit{
+  position: absolute;
+  width: 100%;
+  top: -90%;
+  left: 0;
+  z-index: 0;
+
 }
 

@@ -1,5 +1,5 @@
 <view class="container">
-  <image class="rule-img" src="{{ruleData.image}}" background-size="cover"></image>
+  <image class="rule-img" src="{{ruleData.image}}" mode="widthFix" background-size="cover"></image>
 
   <!-- <image class="i-sound" src="../../images/i-sound.png"></image>
 

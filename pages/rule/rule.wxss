@@ -43,9 +43,18 @@
 	transform: translateX(-50%);
 	/*margin: 44rpx auto 0;*/
 }
-.rule-image {
+page{
+  width: 100%;
+  height: 100%;
+}
+.container{
+  width: 100%;
+  height: 100%
+}
+.rule-img {
 	width: 100%;
-	height: 100%;
+	height: auto;
 	display: block;
 	z-index: -2;
 }
+

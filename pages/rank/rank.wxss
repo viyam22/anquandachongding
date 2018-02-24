@@ -134,14 +134,30 @@ page {
 .ban-btn { 
 	background-color: #434441!important;
 }
-
+.none_rank_box{
+  position: absolute;
+  width: 100%;
+  left: 0;
+  top:120rpx;
+}
 .none_rank{
-	width: 301rpx;
-	height: 301rpx;
-	margin: 310rpx auto 0;
-	display: block;
+  width: 100%
 }
 .sure-btn {
 	margin: 0 auto;
 }
-
+.i-clock {
+	width: 24rpx;
+	height: 24rpx;
+	margin-right: 5rpx;
+	display: block;
+	float: left;
+}
+.clock-txt {
+	font-size: 24rpx;
+	line-height: 24rpx;
+	/* margin-bottom: 37rpx; */
+	/*margin-right: 60rpx;*/
+  width: 180rpx;
+  margin: 0 auto;
+}

@@ -13,6 +13,8 @@ Page({
     showPage: 0,      // 0 答题页 1成功页 2失败页
     shareImage: '',
     shareTitle: '',
+    shareImage2: '',
+    shareTitle2: '',
     time: 0,
     showTime: '',
     itemClass: [],    // 选项的Class
@@ -24,13 +26,15 @@ Page({
     animationData: {},    // 定义动画
     isLock: false,
     showTime2:'',
-    fail:'../../images/img-fail.png'
+    fail:'../../images/img-fail.png',
+    animationData2:{},
+    showAmit:'block',
   },
 
   onLoad: function() {
     var _this = this;
     // _this.setMusic();
-
+  
     wx.showLoading({
       title: '加载中...'
     });
@@ -51,7 +55,6 @@ Page({
           })
           wx.hideLoading();
           _this.getTimeTip();
-        
           _this.initItem(this.data.questionData);
         }
       }
@@ -150,7 +153,9 @@ Page({
     clearInterval(_this.data.getTime);
     console.log('answer', answer)
     var time = _this.data.time * 10;
-  
+    wx.showLoading({
+      title: '加载中...'
+    });
     wx.request({
       url: config.requestBaseURL + api.getAnswer,
       data: {
@@ -163,16 +168,26 @@ Page({
       },
       
       success: ({data}) => {
+        wx.hideLoading();
         if (data.code === 0) {
           var answerData = data.data, shareImage = '', shareTitle = '', qsort = _this.data.qsort;
           // if (!answerData.options) {
             if (answerData.type === 3) {
               // 答题成功
-            
+              setTimeout(function(){
+                _this.setData({
+                  showAmit: "none",
+                });
+              },1500);
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
-              setTimeout(function() {_this.setData({ showPage: 1 })}, config.showTipTime)
+              setTimeout(function() {
+                _this.setMusic(2, function () {
+                  _this.setData({ showPage: 1 });
+                })
+                
+                }, config.showTipTime)
               
             } else if (answerData.type === 4) {
               // 答案错误
@@ -180,37 +195,44 @@ Page({
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
+         
               setTimeout(function() {
-                _this.setMusic('http://huiya-video.hengdikeji.com/error.mp3');
-                _this.setData({ 
-                  showPage: 2 ,
-                  fail: answerData.image
+                _this.setMusic(0,function(){
+                  _this.setData({
+                    showPage: 2,
+                    fail: answerData.image
                   });
+                });
+              
                 }, config.showTipTime);
      
               // 邀请
             } else {
               // 下一题
               qsort ++;
-              _this.setData({ 
-                isShowPopup: true,
-                popupTxt: answerData.msg
-              })
-              _this.setMusic('http://huiya-video.hengdikeji.com/right.mp3');
-              setTimeout(function() { 
-                _this.nextQuestion();
-              }, 500);
-              _this.initItem(answerData);
+              _this.setMusic(1,function(){
+                _this.setData({
+                  isShowPopup: true,
+                  popupTxt: answerData.msg
+                })
+
+                setTimeout(function () {
+                  _this.nextQuestion();
+                }, 1000);
+                _this.initItem(answerData);
+              });
+            
             }
           // }
+          
           _this.setData({
             answerData: answerData,
             qsort: qsort,
-            shareImage: shareImage,
-            shareTitle: shareTitle,
+            shareImage2: shareImage,
+            shareTitle2: shareTitle,
             isLock:false
           })
-          
+        
         }
       }
     });
@@ -289,9 +311,10 @@ Page({
       // 来自页面内转发按钮
       console.log(res.target)
     }
+    console.log(_this.data.shareImage2);
     return {
-      title: _this.shareTitle,
-      imageUrl: _this.shareImage,
+      title: _this.data.shareTitle2,
+      imageUrl: _this.data.shareImage2,
       path: '/pages/index/index?openid_s=' + app.globalData.openid,
       success: function(res) {
         // 转发成功
@@ -302,18 +325,42 @@ Page({
     }
   },
 
-  setMusic: function(mp3) {
+  setMusic: function(mp3,call) {
     //成功mp3:http://huiya-video.hengdikeji.com/right.mp3
     //失败mp3:http://huiya-video.hengdikeji.com/error.mp3
+    var _this=this;
+    var musis=[
+      'https://p.shuzitansuo.com/xcxdt/public/static/mp3/error.mp3',
+      'https://p.shuzitansuo.com/xcxdt/public/static/mp3/right.mp3',
+      'https://p.shuzitansuo.com/xcxdt/public/static/mp3/finish.mp3'
+    ];
     wx.playBackgroundAudio({
-        dataUrl: mp3,
+        dataUrl: musis[mp3],
         title: 'music',
-        coverImgUrl: ''
+        coverImgUrl: '',
+        complete:function(){
+          if (mp3!=2){
+            setTimeout(function () {
+              wx.stopBackgroundAudio();
+            }, 1000)
+          }else{
+   
+            _this.animationData2();
+          }
+          
+          call();
+        }
     })
-    setTimeout(function(){
-      wx.stopBackgroundAudio()
-    },1100);
+   
+  },
+  animationData2:function(){
+    // var animation = wx.createAnimation({
+    //   duration: 1000,
+    //   timingFunction: 'ease',
+    // })
+    // animation.scale(2, 2).rotate(45).step()
+    // this.setData({
+    //   animationData2: animation.export()
+    // })
   }
-
-
 })
