@@ -29,6 +29,7 @@ Page({
     fail:'../../images/img-fail.png',
     animationData2:{},
     showAmit:'block',
+    timeTip: 0
   },
 
   onLoad: function() {
@@ -91,9 +92,11 @@ Page({
       }
       time ++;
       showTime = time > 100 ? Math.floor(time / 100) + '\'' + time % 100 : time;
+      var timeTip = Math.floor((_this.data.duration - time) / _this.data.duration * 10)
       _this.setData({ 
         time: time,
-        showTime: showTime
+        showTime: showTime,
+        timeTip: timeTip
       })
     }, 10)
     
@@ -141,8 +144,8 @@ Page({
 
     var itemClass = _this.data.itemClass;
     if (e) {
-      var index = (e.target.dataset.index)-1;
-      itemClass[parseInt(index)] = 'item-right'
+      var index = parseInt((e.target.dataset.index) -1);
+      itemClass[index] = 'item-selected'
     }
     _this.setData({ 
       isLock: true,
@@ -178,7 +181,7 @@ Page({
                 _this.setData({
                   showAmit: "none",
                 });
-              },1500);
+              },500);
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
@@ -190,8 +193,11 @@ Page({
                 }, config.showTipTime)
               
             } else if (answerData.type === 4) {
-              // 答案错误
-          
+              // 答案错误且无生命值
+              if (e) {
+                itemClass[index] = 'item-wrong'
+              }
+              itemClass[parseInt(answerData.right) - 1] = 'item-right';
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
@@ -207,12 +213,35 @@ Page({
                 }, config.showTipTime);
      
               // 邀请
+            } else if (answerData.type === 2) {
+              // 答案错误但有生命值
+              qsort ++;
+              if (e) {
+                itemClass[index] = 'item-wrong'
+              }
+              itemClass[parseInt(answerData.right) - 1] = 'item-right';
+              _this.setMusic(1,function(){
+                _this.setData({
+                  isShowPopup: false,
+                  popupTxt: answerData.msg
+                })
+
+                setTimeout(function () {
+                  _this.nextQuestion();
+                }, 1000);
+                _this.initItem(answerData);
+              });
             } else {
               // 下一题
               qsort ++;
+              itemClass[parseInt(answerData.right) - 1] = 'item-right';
+              _this.setData({ 
+                isLock: true,
+                itemClass: itemClass
+              })
               _this.setMusic(1,function(){
                 _this.setData({
-                  isShowPopup: true,
+                  isShowPopup: false,
                   popupTxt: answerData.msg
                 })
 
@@ -230,8 +259,10 @@ Page({
             qsort: qsort,
             shareImage2: shareImage,
             shareTitle2: shareTitle,
-            isLock:false
+            isLock:false,
+            itemClass: itemClass
           })
+          console.log(_this.data.itemClass)
         
         }
       }

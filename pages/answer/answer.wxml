@@ -8,9 +8,11 @@
   </view>
 
   <view class="examing" wx:if="{{showPage === 0}}">
+    <view class="time-tip">剩时:{{timeTip}}s</view>
     <view class="progress-box">
       <view class="progress-bar {{(duration - time) / duration < 0.3 ? 'progress-dange' : ''}}" style="width: {{(duration - time) / duration * 100 + '%'}}"></view>
     </view>
+
     <view class="title-txt">{{questionData.title}}</view>
 
     <view class="option-list">

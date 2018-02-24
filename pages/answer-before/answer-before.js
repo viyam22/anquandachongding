@@ -94,6 +94,17 @@ Page({
     }, 1000)
   },
 
+  toRulePage: function() {
+    wx.showLoading({
+      title: '加载中...'
+    });
+    wx.navigateTo({
+      url: path.rulePage,
+      complete: function () {
+        wx.hideLoading();
+      }
+    })
+  },
 
   
 })

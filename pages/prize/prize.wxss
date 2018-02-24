@@ -52,10 +52,10 @@
 }
 .service {
 	width: 100%;
-	font-size: 20rpx;
+	font-size: 27rpx;
 	color: #122d4d;
 	text-align: center;
 	position: fixed;
-	bottom: 32rpx;
+	bottom: 24rpx;
 	right: 0;
 }

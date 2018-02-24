@@ -1,12 +1,12 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/rank/rank",
+    "pages/answer-before/answer-before",
     "pages/prize/prize",
     "pages/answer/answer",
-    "pages/answer-before/answer-before",
     "pages/my-rank/my-rank",
     "pages/rule/rule",
-    "pages/rank/rank",
     "pages/share/share"
   ],
   "window": {

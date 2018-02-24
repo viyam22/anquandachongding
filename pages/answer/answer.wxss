@@ -52,11 +52,14 @@
 .item-default {
 	background-color: #f0f0f0;
 }
+.item-selected {
+	background-color: #aaa;
+}
 .item-wrong {
-	background-color: #828d98;
+	background-color: #a3062f;
 }
 .item-right {
-	background-color: #6285ff;
+	background-color: #1f7445;
 }
 .i-cup {
 	width: 369rpx;
@@ -112,6 +115,7 @@
 	width: 100%;
 	height: 32rpx;
 	border-radius: 16rpx;
+	margin-top: 60rpx;
 }
 .popup {
 	width: 100%;
@@ -170,4 +174,14 @@
   z-index: 0;
 
 }
+.time-tip {
+	font-size: 24rpx;
+	margin-top: 50rpx;
+	position: absolute;
+	top: 180rpx;
+	left: 128rpx;
+}
+.examing {
+	padding-top: 30rpx;
+} 
 
