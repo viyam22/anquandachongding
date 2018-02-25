@@ -41,7 +41,7 @@ page {
 .life-txt {
 	font-size: 29rpx;
 	line-height: 40rpx;
-	margin-top: 78rpx;
+	margin-top: 64rpx;
 	float: left;
 }
 .i-life {

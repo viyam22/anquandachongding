@@ -22,9 +22,10 @@
       <view class="ranking-txt">排行榜</view>
     </view>
     <view class="box-s-con">
-      <view class="box-s icon-box" bindtap="toRulePage">
+      <view class="box-s icon-box">
+          <button class="btn rule-btn" open-type="share"></button>
         <image class="i-rule" src="../../images/i-rule.png"></image>
-        <view class="icon-txt">规则说明</view>
+        <view class="icon-txt">邀请好友</view>
       </view>
       <view class="box-s icon-box" bindtap="openNewApp">
         <image class="i-power" src="../../images/i-power.png"></image>
@@ -32,6 +33,7 @@
       </view>
     </view>
   </view>
+  <text class="rule-link" bindtap="toRulePage">活动规则</text>
 </view>
 
 <view class="container ad_container" wx:if="{{showPageType === 1}}">

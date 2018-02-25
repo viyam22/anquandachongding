@@ -51,7 +51,7 @@ Page({
   // 获取首页数据
   initIndexData: function () {
     var _this = this;
-    console.log(111);
+ 
     wx.request({
       url: config.requestBaseURL + api.getIndex,
       data: {
@@ -132,7 +132,7 @@ Page({
       title: '加载中...'
     });
     wx.navigateTo({
-      url: path.rulePage,
+      url: path.getRule,
       complete: function () {
         wx.hideLoading();
       }
@@ -165,5 +165,23 @@ Page({
         }
       })
     };
+  },
+  onShareAppMessage: function (res) {
+    var _this = this;
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+    }
+    return {
+      title: _this.indexData.share_msg,
+      imageUrl: _this.indexData.share_image,
+      path: '/pages/index/index?openid_s=' + app.globalData.openid,
+      success: function (res) {
+        // 转发成功
+        console.log(res);
+      },
+      fail: function (res) {
+        // 转发失败
+      }
+    }
   },
 })

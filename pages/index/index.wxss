@@ -13,7 +13,7 @@ page {
 	box-sizing: border-box;
 }
 .box-l {
-	height: 262rpx;
+	height: 230rpx;
 	width: 664rpx;
 	background-color: #fff;
 	border-radius: 30rpx;
@@ -36,7 +36,7 @@ page {
 }
 .i-answer {
 	width: 158rpx;
-	height: 233rpx;
+	height: 184rpx;
 	position: absolute;
 	top: 50%;
 	left: 92rpx;
@@ -68,7 +68,7 @@ page {
 }
 .i-ranking {
 	width: 224rpx;
-	height: 163rpx;
+	height: 146rpx;
 	position: absolute;
 	left: 50%;
 	top: 25rpx;
@@ -89,7 +89,7 @@ page {
 	width: 100%;
 	text-align: center;
 	position: absolute;
-	top: 195rpx;
+	top: 166rpx;
 }
 .icon-txt {
 	font-size: 32rpx;
@@ -122,6 +122,22 @@ page {
   padding: 0 0 0 0;
   width: 100%;
   height: 100%;
+}
+.rule-link {
+	font-size: 26rpx;
+	position: absolute;
+	bottom: 21rpx;
+	left: 0;
+	width: 100%;
+	text-align: center;
+}
+.rule-btn{
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 999;
 }
 
 
