@@ -1,0 +1,14 @@
+<view class="container">
+  <!-- <image class="i-sound" src="../../images/i-sound.png"></image> -->
+  
+  <image class="img-gift" mode='widthFix' src="../../images/money.png"></image> 
+  <view class="info">
+    <view class="title">账户护额</view>
+    <view class="text">{{money}}</view>
+    <view class="btn submit-btn" bindtap="submit">提现</view>
+  </view>
+
+  <view class="service">客服电话：400 0000 0000</view>
+
+  <image class="bg-img" src="../../images/img0.png"></image>
+</view>

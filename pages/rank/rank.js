@@ -92,12 +92,17 @@ Page({
   },
 
   toPrizePage: function() {
-    var pathUrl = parseInt(this.data.rankData.prize_type) === 1 ? path.prizePage : path.indexPage;
+    var pathUrl = path.prizePage;
     wx.navigateTo({
       url: pathUrl
     })
   },
-
+  toPrizePage2:function(){
+    var pathUrl = path.money;
+    wx.navigateTo({
+      url: pathUrl
+    })
+  },
   toIndexPage: function() {
     wx.navigateTo({
       url: path.indexPage

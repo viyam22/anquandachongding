@@ -25,7 +25,10 @@
     </view>
   </view>
 
-  <view class="btn exchange-btn {{rankData.prize === -1 ? 'ban-btn' : ''}}" bindtap="{{rankData.prize === -1 ? '' : 'toPrizePage'}}" wx:if="{{tagIndex === 1}}">兑换奖品</view>
+  <view class="btn exchange-btn {{rankData.prize === -1 ? 'ban-btn' : ''}}" bindtap="{{rankData.prize === -1 ? '' : 'toPrizePage'}}" wx:if="{{tagIndex === 1}}">领取奖品
+  </view>
+ <view class="btn exchange-btn {{rankData.prize === -1 ? 'ban-btn' : ''}}" bindtap="{{rankData.prize === -1 ? '' : 'toPrizePage2'}}" wx:if="{{tagIndex === 2}}">领取奖品
+ </view>
  </view>
  <view class="none_rank_box" wx:else>
      <view class="clock-txt">

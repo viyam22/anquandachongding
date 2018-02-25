@@ -141,11 +141,15 @@ Page({
   postAnswer: function(e) {
     var _this = this;
     if (_this.data.isLock) return;
-
     var itemClass = _this.data.itemClass;
     if (e) {
+      var right = _this.data.questionData.right;
+      console.log();
       var index = parseInt((e.target.dataset.index) -1);
-      itemClass[index] = 'item-selected'
+      itemClass[parseInt(right) - 1] = 'item-right';
+      if (e.target.dataset.index != right){
+        itemClass[index] ='item-wrong';
+      }
     }
     _this.setData({ 
       isLock: true,
@@ -156,6 +160,7 @@ Page({
     clearInterval(_this.data.getTime);
     console.log('answer', answer)
     var time = _this.data.time * 10;
+  
     wx.showLoading({
       title: '加载中...'
     });
@@ -194,10 +199,8 @@ Page({
               
             } else if (answerData.type === 4) {
               // 答案错误且无生命值
-              if (e) {
-                itemClass[index] = 'item-wrong'
-              }
-              itemClass[parseInt(answerData.right) - 1] = 'item-right';
+            
+              // itemClass[parseInt(answerData.right) - 1] = 'item-right';
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
@@ -216,10 +219,8 @@ Page({
             } else if (answerData.type === 2) {
               // 答案错误但有生命值
               qsort ++;
-              if (e) {
-                itemClass[index] = 'item-wrong'
-              }
-              itemClass[parseInt(answerData.right) - 1] = 'item-right';
+             
+              // itemClass[parseInt(answerData.right) - 1] = 'item-right';
               _this.setMusic(1,function(){
                 _this.setData({
                   isShowPopup: true,
@@ -229,15 +230,13 @@ Page({
                 setTimeout(function () {
                   _this.nextQuestion();
                 }, 1000);
-                _this.initItem(answerData);
+               
               });
             } else {
               // 下一题
-              if (e) {
-                itemClass[index] = 'item-wrong'
-              }
+             
               qsort ++;
-              itemClass[parseInt(answerData.right) - 1] = 'item-right';
+              // itemClass[parseInt(answerData.right) - 1] = 'item-right';
               _this.setData({ 
                 isLock: true,
                 itemClass: itemClass
@@ -251,7 +250,7 @@ Page({
                 setTimeout(function () {
                   _this.nextQuestion();
                 }, 1000);
-                _this.initItem(answerData);
+          
               });
             
             }
@@ -263,10 +262,7 @@ Page({
             shareImage2: shareImage,
             shareTitle2: shareTitle,
             isLock:false,
-            itemClass: itemClass
           })
-          console.log(_this.data.itemClass)
-        
         }
       }
     });

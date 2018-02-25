@@ -5,7 +5,6 @@ const config = {
 	indexAdTime: 3,  // 广告页倒数时间，秒
 	showTipTime: 800,  // 答题显示对错提示时间，毫秒
 	navigateTime: 2000,  // 提示后跳转页面的时间，毫秒
-
 }
 
 const api = {
@@ -17,7 +16,9 @@ const api = {
 	getRule: '/rule',
 	getMemberSave: '/member/save',
 	getUserInvite: '/user_invite',
-	getAd: '/ad'
+	getAd: '/ad',
+  getMoney:'/money/show',
+  putMoney:'/money/take'
 }
 
 const path = {
@@ -29,7 +30,8 @@ const path = {
 	prizePage: '../prize/prize',
 	rankPage: '../rank/rank',
 	rulePage: '../rule/rule',
-	share: '../share/share'
+	share: '../share/share',
+  money:'../money/money'
 }
 
 module.exports = {
