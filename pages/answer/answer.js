@@ -181,7 +181,7 @@ Page({
                 _this.setData({
                   showAmit: "none",
                 });
-              },500);
+              },2000);
               clearInterval(_this.data.getTime);
               shareTitle = answerData.share_msg || '安全大冲顶';
               shareImage = answerData.share_image || '';
@@ -222,7 +222,7 @@ Page({
               itemClass[parseInt(answerData.right) - 1] = 'item-right';
               _this.setMusic(1,function(){
                 _this.setData({
-                  isShowPopup: false,
+                  isShowPopup: true,
                   popupTxt: answerData.msg
                 })
 
@@ -233,6 +233,9 @@ Page({
               });
             } else {
               // 下一题
+              if (e) {
+                itemClass[index] = 'item-wrong'
+              }
               qsort ++;
               itemClass[parseInt(answerData.right) - 1] = 'item-right';
               _this.setData({ 

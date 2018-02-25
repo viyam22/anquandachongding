@@ -132,7 +132,7 @@ Page({
       title: '加载中...'
     });
     wx.navigateTo({
-      url: path.getRule,
+      url: path.rulePage,
       complete: function () {
         wx.hideLoading();
       }
@@ -172,8 +172,8 @@ Page({
       // 来自页面内转发按钮
     }
     return {
-      title: _this.indexData.share_msg,
-      imageUrl: _this.indexData.share_image,
+      title: _this.data.indexData.share_msg,
+      imageUrl: _this.data.indexData.share_image,
       path: '/pages/index/index?openid_s=' + app.globalData.openid,
       success: function (res) {
         // 转发成功
