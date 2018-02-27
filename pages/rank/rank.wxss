@@ -158,6 +158,6 @@ page {
 	line-height: 24rpx;
 	/* margin-bottom: 37rpx; */
 	/*margin-right: 60rpx;*/
-  width: 180rpx;
+  width: 200rpx;
   margin: 0 auto;
 }

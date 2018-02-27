@@ -1,7 +1,5 @@
 const { api, config, path } = require('../../utils/config.js');
-
 const app = getApp()
-
 Page({
   data: {
     questionData: null,
@@ -36,30 +34,31 @@ Page({
     var _this = this;
     // _this.setMusic();
   
-    wx.showLoading({
-      title: '加载中...'
-    });
-    wx.request({
-      url: config.requestBaseURL + api.getQuestion,
-      data: {
-        token: config.token,
-        openid: app.globalData.openid,
-      },
-      success: ({data}) => {
-        if (data.code === 0) {
-          console.log('questionData', data.data)
-          app.globalData.questionData = data.data;
-          _this.setData({ 
-            questionData: app.globalData.questionData,
-            duration: parseInt(app.globalData.questionData.duration) * 100,
-            score: app.globalData.questionData.score
-          })
-          wx.hideLoading();
-          _this.getTimeTip();
-          _this.initItem(this.data.questionData);
-        }
-      }
-    });
+    _this.setData({
+      questionData: app.globalData.questionData,
+      duration: parseInt(app.globalData.questionData.duration) * 100,
+      score: app.globalData.questionData.score
+    })
+    wx.hideLoading();
+    _this.getTimeTip();
+    _this.initItem(this.data.questionData);
+    // wx.showLoading({
+    //   title: '加载中...'
+    // });
+    // wx.request({
+    //   url: config.requestBaseURL + api.getQuestion,
+    //   data: {
+    //     token: config.token,
+    //     openid: app.globalData.openid,
+    //   },
+    //   success: ({data}) => {
+    //     if (data.code === 0) {
+    //       console.log('questionData', data.data)
+    //       app.globalData.questionData = data.data;
+         
+    //     }
+    //   }
+    // });
   },
 
   scaleItem: function() {
@@ -267,7 +266,6 @@ Page({
       }
     });
   },
-
   getLife: function() {
     var _this = this;
     var getLiftInterval = setInterval(function() {
@@ -276,9 +274,7 @@ Page({
         data: {
           token: config.token,
           openid: app.globalData.openid,
-          
         },
-        
         success: ({data}) => {
           if (data.code === 0 && data.data.life > 0) {
             clearInterval(_this.data.getLiftInterval)

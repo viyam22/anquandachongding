@@ -40,18 +40,19 @@ Page({
       },
       success: ({ data }) => {
         wx.hideLoading();
-        wx.showToast({
-          title: data.data.msg,
-          icon: 'success',
-          complete:function(){
-            setTimeout(function(){
+        wx.showModal({
+          title:'操作成功',
+          content: data.data.msg,
+          showCancel:false,
+      
+          success:function(res){
+            if (res.confirm) {
               wx.navigateTo({
-                url: path.rankPage,
+                url: path.indexPage,
                 complete: function () {
                 }
               })
-            },1500)
-         
+            }
           }
         })
       }

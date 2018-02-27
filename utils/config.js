@@ -3,7 +3,7 @@ const config = {
 	token: 'f14cf4eca31dac45702e5b4a24975337',
   newAppId:'',
 	indexAdTime: 3,  // 广告页倒数时间，秒
-	showTipTime: 800,  // 答题显示对错提示时间，毫秒
+	showTipTime: 500,  // 答题显示对错提示时间，毫秒
 	navigateTime: 2000,  // 提示后跳转页面的时间，毫秒
 }
 

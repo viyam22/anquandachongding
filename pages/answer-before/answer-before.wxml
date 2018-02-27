@@ -23,7 +23,7 @@
   <view class="tip-txt">{{questionData.msg}}</view>
   <button class="btn invitation-btn" open-type="share">邀请</button>
 
-  <text class="rule-link" bindtap="toRulePage">活动规则</text>
+  <text class="rule-link" bindtap="toRulePage"></text>
 
   <image class="bg-img" src="../../images/img0.png"></image>
 

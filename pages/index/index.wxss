@@ -125,11 +125,11 @@ page {
 }
 .rule-link {
 	font-size: 26rpx;
-	position: absolute;
-	bottom: 21rpx;
-	left: 0;
 	width: 100%;
 	text-align: center;
+  display: block;
+  margin-top: 20rpx;
+  color: #6aa4ef;
 }
 .rule-btn{
   display: block;

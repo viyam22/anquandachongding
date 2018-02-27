@@ -10,6 +10,7 @@ App({
     wx.login({
       success: ({code}) => {
         if (code) {
+        
           this.globalData.code = code;
         }
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -100,11 +101,12 @@ App({
         if (data.code !== 0) {
           console.log(data.msg);
         }
+      
         wx.setStorage({
           key: 'openid',
-          data: data.data.openid
+          data: data.openid
         })
-        _this.globalData.openid = data.data.openid;
+        _this.globalData.openid = data.openid;
         _this.initFun();
       }
     });
@@ -120,7 +122,6 @@ App({
       data: {
         token: config.token,
         openid: _this.globalData.openid,
-        
       },
       
       success: ({data}) => {

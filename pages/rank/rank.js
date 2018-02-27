@@ -11,6 +11,7 @@ Page({
     image:'',
     showTime:'计算中',
     starttime:'',
+
   },
   
   onLoad: function() {
@@ -92,7 +93,13 @@ Page({
   },
 
   toPrizePage: function() {
-    var pathUrl = path.prizePage;
+    var pathUrl;
+    if (this.data.rankData.prize_type==1){
+       pathUrl = path.prizePage;
+    }else{
+      pathUrl = path.money;
+    }
+
     wx.navigateTo({
       url: pathUrl
     })
