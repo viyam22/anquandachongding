@@ -5,11 +5,13 @@ const app = getApp()
 Page({
   data: {
     rankData: null,
-    userInfo: null
+    userInfo: null,
+    phone:''
   },
   
   onLoad: function() {
     var _this = this;
+    
     _this.setData({ 
       rankData: app.globalData.rankData,
       userInfo: app.globalData.userInfo 

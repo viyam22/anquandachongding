@@ -31,6 +31,7 @@ Page({
       })
       return;
     }
+
     if (_this.data.starttime < 0) {
       wx.navigateTo({
         url: path.answerPage

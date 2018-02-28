@@ -27,9 +27,10 @@ Page({
   },
   
   toIndexPage: function() {
-    wx.navigateTo({
-      url: path.indexPage
+    wx.navigateBack({
+      delta: 1
     })
+   
   },
 
 

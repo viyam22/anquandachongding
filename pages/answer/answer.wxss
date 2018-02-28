@@ -46,7 +46,7 @@
 	text-align: center;
 	line-height: 128rpx;
 	font-size: 32rpx;
-	color: #6c7076;
+	color: #000;
 	font-weight: bold;
 }
 .item-default {
@@ -57,9 +57,11 @@
 }
 .item-wrong {
 	background-color: #a3062f;
+  color: #fff;
 }
 .item-right {
 	background-color: #1f7445;
+  color: #fff;
 }
 .i-cup {
 	width: 369rpx;

@@ -1,5 +1,5 @@
 page {
-	background-color: #f2f8fd;
+	 background-color: #f2f8fd; 
 }
 .container {
 	padding: 22rpx 32rpx;
@@ -132,7 +132,8 @@ page {
 	margin: 28rpx auto;
 }
 .ban-btn { 
-	background-color: #434441!important;
+	background-color: rgb(246,246,246)!important;
+  color: rgb(162,162,162)
 }
 .none_rank_box{
   position: absolute;
@@ -158,6 +159,6 @@ page {
 	line-height: 24rpx;
 	/* margin-bottom: 37rpx; */
 	/*margin-right: 60rpx;*/
-  width: 200rpx;
+  width: 300rpx;
   margin: 0 auto;
 }

@@ -71,3 +71,7 @@
   font-size: 40rpx;
   margin-bottom: 200rpx;
 }
+.ban-btn { 
+	background-color: rgb(246,246,246)!important;
+  color: rgb(162,162,162)
+}

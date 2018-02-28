@@ -4,7 +4,8 @@ const app = getApp()
 
 Page({
   data: {
-    money:0
+    money:0,
+    phone:''
   },
   onLoad: function () {
     var _this = this;
@@ -21,6 +22,7 @@ Page({
       success: ({ data }) => {
         this.setData({
           money: data.data.money,
+          phone: data.data.phone
         })
         wx.hideLoading();
       }
@@ -47,11 +49,14 @@ Page({
       
           success:function(res){
             if (res.confirm) {
-              wx.navigateTo({
-                url: path.indexPage,
-                complete: function () {
-                }
+              wx.navigateBack({
+                delta: 3
               })
+              // wx.redirectto({
+              //   url: path.indexPage,
+              //   complete: function () {
+              //   }
+              // })
             }
           }
         })

@@ -6,9 +6,24 @@ Page({
   data: {
     inputPhone: null,
     inputName: '',
-    inputAdress: ''
+    inputAdress: '',
+    phone:''
   },
-  
+  onLoad:function(){
+    wx.request({
+      url: config.requestBaseURL + api.getMoney,
+      data: {
+        token: config.token,
+        openid: app.globalData.openid
+      },
+      success: ({ data }) => {
+        this.setData({
+          phone: data.data.phone,
+        })
+
+      }
+    })
+  },
   // 绑定手机输入值
   bindPhoneInput: function(e) {
     this.setData({
@@ -88,8 +103,8 @@ Page({
           })
         }
         setTimeout(function() {
-          wx.navigateTo({
-            url: path.rankPage
+          wx.navigateBack({
+            delta: 3
           })
         }, config.navigateTime)
       }

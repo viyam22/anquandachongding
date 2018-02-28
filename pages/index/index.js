@@ -9,7 +9,8 @@ Page({
     indexData: [],    // 首页数据
     showPageType: -1,
     time: 3,
-    adImgClass:{}
+    adImgClass:{},
+    linkappid:''
   },
 
   onShow: function() {
@@ -27,10 +28,10 @@ Page({
 
 
     var showPageType;
+  
     wx.showLoading({
       title: '加载中...'
     });
-
 
     var getApi = setInterval(function() {
       if (app.globalData.indexData) {
@@ -64,7 +65,11 @@ Page({
         if (data.code === 0) {
           app.globalData.indexData = data.data;
           app.globalData.lifeCount = data.life;
-
+          wx.hideLoading();
+          _this.setData({ 
+            linkappid: data.data.linkappid,
+            indexData: app.globalData.indexData
+            });
         }
       }
     });
@@ -139,12 +144,12 @@ Page({
     })
   },
   toSharePage:function(){
-    wx.navigateTo({
+    wx.redirectto({
       url: path.answerBeforePage
     })
   },
   openNewApp:function(){
-    var appid = config.newAppId;
+    var appid = this.data.linkappid;
     if (!appid){
       wx.showToast({
         title: '暂未开放',
@@ -153,15 +158,20 @@ Page({
       })
       
     }else{
+  
       wx.navigateToMiniProgram({
         appId: appid,
         path: '',
         extraData: {
           openid: app.globalData.openid
         },
-        envVersion: 'release',
+        envVersion: '',
         success(res) {
           // 打开成功
+          console.log(res);
+        },
+        fail(res){
+          console.log(res);
         }
       })
     };

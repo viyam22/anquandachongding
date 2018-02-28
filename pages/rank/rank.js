@@ -11,7 +11,6 @@ Page({
     image:'',
     showTime:'计算中',
     starttime:'',
-
   },
   
   onLoad: function() {
@@ -29,7 +28,7 @@ Page({
 
       success: ({data}) => {
         wx.hideLoading();
-        if (data.code === 0) {
+        if (data.code === 0 || data.code === 1) {
           console.log('rank', data.data)
           app.globalData.rankData = data.data;
           this.setData({ 
@@ -37,7 +36,7 @@ Page({
             userInfo: app.globalData.userInfo ,
             showData: app.globalData.rankData.friend
           })
-  
+        
           if(data.data.type==2){
             var starttime = data.data.starttime;
             this.setData({
@@ -111,8 +110,8 @@ Page({
     })
   },
   toIndexPage: function() {
-    wx.navigateTo({
-      url: path.indexPage
+    wx.navigateBack({
+      delta:1
     })
   }
   

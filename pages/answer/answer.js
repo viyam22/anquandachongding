@@ -318,7 +318,8 @@ Page({
             time: 0,
             duration: parseInt(data.data.duration) * 100,
             score: data.data.score,
-            isShowPopup: false
+            isShowPopup: false,
+            showTime2: data.data.score
           })
         }
       }
