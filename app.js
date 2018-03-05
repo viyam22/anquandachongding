@@ -96,13 +96,13 @@ App({
       },
       
       success: ({data}) => {
-        console.log('login', data)
+        console.log('login', data.openid)
         if (data.code !== 0) {
           console.log(data.msg);
         }
         wx.setStorage({
           key: 'openid',
-          data: data.data.openid
+          data: data.openid
         })
         _this.globalData.openid = data.data.openid;
         _this.initFun();

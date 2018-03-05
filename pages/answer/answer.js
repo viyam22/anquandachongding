@@ -32,9 +32,21 @@ Page({
     timeTip: 0
   },
 
-  onLoad: function() {
+  onLoad: function(options) {
     var _this = this;
     // _this.setMusic();
+    // console.log('options', options)
+    // if (options.type === '4') {
+    //   _this.setData({
+    //     showPage: 2,
+    //     fail: options.img.image
+    //   });
+    //   return;
+    // } else 
+    // if (options.type === '5') {
+    //   _this.setData({ showPage: 1 });
+    //   return;
+    // }
   
     wx.showLoading({
       title: '加载中...'
@@ -49,7 +61,24 @@ Page({
         if (data.code === 0) {
           console.log('questionData', data.data)
           app.globalData.questionData = data.data;
+          var questionData = data.data;
+          var showPage;
+          if (questionData.type === 4) {
+            //  答题活动排行榜未生成，答题失败.显示答题失败页面
+            showPage = 2;
+            // return;
+          } else if (questionData.type === 5) {
+            // 答题活动排行榜未生成，答题成功.显示答题成功页面
+            showPage = 1;
+            // return;
+          } else {
+            showPage = 0;
+          }
+        
           _this.setData({ 
+            showPage,
+            shareImage2: questionData.share_image,
+            shareTitle2: questionData.share_msg,
             questionData: app.globalData.questionData,
             duration: parseInt(app.globalData.questionData.duration) * 100,
             score: app.globalData.questionData.score
@@ -189,8 +218,7 @@ Page({
                 _this.setMusic(2, function () {
                   _this.setData({ showPage: 1 });
                 })
-                
-                }, config.showTipTime)
+              }, config.showTipTime)
               
             } else if (answerData.type === 4) {
               // 答案错误且无生命值
@@ -231,7 +259,7 @@ Page({
                 }, 1000);
                 _this.initItem(answerData);
               });
-            } else {
+            } else if (answerData.type === 1) {
               // 下一题
               qsort ++;
               itemClass[parseInt(answerData.right) - 1] = 'item-right';
@@ -250,9 +278,9 @@ Page({
                 }, 1000);
                 _this.initItem(answerData);
               });
-            
+            } else if (answerData.type === 6) {
+
             }
-          // }
           
           _this.setData({
             answerData: answerData,
