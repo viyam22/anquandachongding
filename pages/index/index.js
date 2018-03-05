@@ -17,7 +17,7 @@ Page({
     var _this = this;
  
     var has=setInterval(function(){
-    
+ 
       if (!app.globalData.openid){
         return;
       }else{

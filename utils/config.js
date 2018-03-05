@@ -18,7 +18,8 @@ const api = {
 	getUserInvite: '/user_invite',
 	getAd: '/ad',
   getMoney:'/money/show',
-  putMoney:'/money/take'
+  putMoney:'/money/take',
+  inlogin:'/logs/login'
 }
 
 const path = {

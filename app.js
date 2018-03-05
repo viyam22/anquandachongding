@@ -17,34 +17,75 @@ App({
       }
     })
     
-    // 获取用户信息
-    wx.getUserInfo({
-      success: ({ userInfo }) => {
-        this.globalData.userInfo = userInfo;
+   
+    wx.getSetting({
+      success: res => {
+    
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+          // 获取用户信息
+          wx.getUserInfo({
+            success: ({ userInfo }) => {
+              this.globalData.userInfo = userInfo;
 
-        this.getOpenid();
-        // 可以将 res 发送给后台解码出 unionIds
-        // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-        // 所以此处加入 callback 以防止这种情况
-        // if (this.userInfoReadyCallback) {
-        //   this.userInfoReadyCallback(res)
-        // }
+              this.getOpenid();
+              // 可以将 res 发送给后台解码出 unionIds
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
+              }
+            }
+          })
+        }else{
+          wx.getUserInfo({
+            success: ({ userInfo }) => {
+              this.globalData.userInfo = userInfo;
+
+              this.getOpenid();
+              // 可以将 res 发送给后台解码出 unionIds
+              // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+              // 所以此处加入 callback 以防止这种情况
+              if (this.userInfoReadyCallback) {
+                this.userInfoReadyCallback(res)
+              }
+            }
+          })
+        }
+      
       }
     })
-    // wx.getSetting({
-    //   success: res => {
-    //     // if (res.authSetting['scope.userInfo']) {
-    //       // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
-        
-    //   // }
-    //   }
-    // })
   },
 
-  getOpenid: function() {
+  getOpenid: function () {
     var _this = this;
     // 缓存有openid则不再请求接口
-    this.userLogin();
+    wx.getStorage({
+      key: 'openid',
+      success: ({ data }) => {
+        _this.globalData.openid = data;
+        _this.inlogin();
+        _this.initFun();
+      },
+      fail: res => {
+        _this.userLogin();
+      }
+    })
+  },
+  //统计在线人数
+  inlogin:function(){
+    var _this = this;
+    wx.request({
+      url: config.requestBaseURL + api.inlogin,
+      data: {
+        token: config.token,
+        openid: _this.globalData.openid
+      },
+
+      success: ({ data }) => {
+        console.log('登录成功');
+      }
+    });
   },
 
   // 执行各页面的接口访问
@@ -94,12 +135,13 @@ App({
           console.log(data.msg);
         }
       
-        // wx.setStorage({
-        //   key: 'openid',
-        //   data: data.openid
-        // })
+        wx.setStorage({
+          key: 'openid',
+          data: data.openid
+        })
         _this.globalData.openid = data.openid;
         _this.initFun();
+        _this.inlogin();
       }
     });
   },

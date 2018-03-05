@@ -40,9 +40,35 @@ Page({
       var countDown = setInterval(function() {
         if (_this.data.starttime === 0) {
           clearInterval(countDown)
-          wx.navigateTo({
-            url: path.answerPage
-          })
+          wx.showLoading({
+            title: '加载中...'
+          });
+          wx.request({
+            url: config.requestBaseURL + api.getQuestion,
+            data: {
+              token: config.token,
+              openid: app.globalData.openid,
+            },
+            success: ({ data }) => {
+              if (data.code === 0) {
+                console.log('questionData', data.data)
+                app.globalData.questionData = data.data;
+                var questionData = data.data;
+                if (questionData.type === 1 || questionData.type === 3) {
+                  pathUrl = path.answerBeforePage;
+                } else if (questionData.type === 2) {
+                  pathUrl = path.answerPage;
+                }
+                wx.navigateTo({
+                  url: pathUrl,
+                  complete: function () {
+                    wx.hideLoading();
+                  }
+                })
+              }
+            }
+          });
+        
         } else {
           var starttime = _this.data.starttime, showTime;
           if (starttime > 3600) {
