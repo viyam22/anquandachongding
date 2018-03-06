@@ -105,9 +105,15 @@ Page({
           var questionData = data.data;
           if (questionData.type === 1 || questionData.type === 3) {
             pathUrl = path.answerBeforePage;
-          } else if (questionData.type === 2) {
+          } else if (questionData.type === 2 ||
+                    questionData.type === 4 ||
+                    questionData.type === 5) {
             pathUrl = path.answerPage;
+          } else if (questionData.type === 6) {
+            // 答题活动排行榜已生成.跳转到排行版页面
+            pathUrl = path.rankPage;
           }
+          console.log('pathUrl', pathUrl)
           wx.navigateTo({
             url: pathUrl,
             complete:function(){

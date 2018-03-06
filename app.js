@@ -130,7 +130,7 @@ App({
       },
       
       success: ({data}) => {
-        console.log('login', data)
+        console.log('login', data.openid)
         if (data.code !== 0) {
           console.log(data.msg);
         }
