@@ -1,5 +1,5 @@
 const config = {
-	requestBaseURL: 'https://p.shuzitansuo.com/anquandachongding',
+  requestBaseURL: 'https://dati.yunqer.com/',
 	token: 'f14cf4eca31dac45702e5b4a24975337',
   newAppId:'',
 	indexAdTime: 3,  // 广告页倒数时间，秒

@@ -6,7 +6,7 @@ Page({
   data: {
     questionData: null,
     lifeCount: 0,
-    starttime: 0,
+    starttime: 2,
     showTime: 0,
     showText:0,
   },
@@ -39,7 +39,7 @@ Page({
     } else {
       var countDown = setInterval(function() {
         if (_this.data.starttime === 0) {
-          clearInterval(countDown)
+          clearInterval(countDown);
           wx.showLoading({
             title: '加载中...'
           });
@@ -51,7 +51,6 @@ Page({
             },
             success: ({ data }) => {
               if (data.code === 0) {
-                console.log('questionData', data.data)
                 app.globalData.questionData = data.data;
                 var questionData = data.data;
                 if (questionData.type === 1 || questionData.type === 3) {
@@ -107,19 +106,7 @@ Page({
     }
   },
 
-  toAnswerPage: function() {
-    var _this = this;
-    var countDown = setInterval(function() {
-      if (_this.data.time === 0) {
-        clearInterval(countDown)
-        wx.navigateTo({
-          url: path.answerPage
-        })
-      } else {
-        _this.setData({ time: _this.data.time -1 })
-      }
-    }, 1000)
-  },
+
 
   toRulePage: function() {
     wx.showLoading({

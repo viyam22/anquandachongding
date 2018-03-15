@@ -12,7 +12,6 @@ Page({
     adImgClass:{},
     linkappid:''
   },
-
   onShow: function() {
     var _this = this;
  
@@ -113,7 +112,7 @@ Page({
             // 答题活动排行榜已生成.跳转到排行版页面
             pathUrl = path.rankPage;
           }
-          console.log('pathUrl', pathUrl)
+         
           wx.navigateTo({
             url: pathUrl,
             complete:function(){
@@ -164,7 +163,6 @@ Page({
       })
       
     }else{
-  
       wx.navigateToMiniProgram({
         appId: appid,
         path: '',

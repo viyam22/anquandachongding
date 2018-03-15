@@ -30,7 +30,7 @@ Page({
     timeTip: 0
   },
 
-  onLoad: function(options) {
+  onLoad: function() {
     var _this = this;
     // _this.setMusic();
     // console.log('options', options)
@@ -45,80 +45,36 @@ Page({
     //   _this.setData({ showPage: 1 });
     //   return;
     // }
-  
+    var questionData = app.globalData.questionData;
+    var showPage;
+    if (questionData.type === 4) {
+      //  答题活动排行榜未生成，答题失败.显示答题失败页面
+      showPage = 2;
+      // return;
+    } else if (questionData.type === 5) {
+      // 答题活动排行榜未生成，答题成功.显示答题成功页面
+      showPage = 1;
+      // return;
+    } else {
+      showPage = 0;
+    }
 
     _this.setData({
+      showPage,
+      shareImage2: questionData.share_image,
+      shareTitle2: questionData.share_msg,
       questionData: app.globalData.questionData,
       duration: parseInt(app.globalData.questionData.duration) * 100,
       score: app.globalData.questionData.score
     })
     wx.hideLoading();
+   
     _this.getTimeTip();
-    _this.initItem(this.data.questionData);
-    // wx.showLoading({
-    //   title: '加载中...'
-    // });
-    // wx.request({
-    //   url: config.requestBaseURL + api.getQuestion,
-    //   data: {
-    //     token: config.token,
-    //     openid: app.globalData.openid,
-    //   },
-    //   success: ({data}) => {
-    //     if (data.code === 0) {
-    //       console.log('questionData', data.data)
-    //       app.globalData.questionData = data.data;
-         
-    //     }
-    //   }
-    // });
-
-    wx.showLoading({
-      title: '加载中...'
-    });
-    wx.request({
-      url: config.requestBaseURL + api.getQuestion,
-      data: {
-        token: config.token,
-        openid: app.globalData.openid,
-      },
-      success: ({data}) => {
-        if (data.code === 0) {
-          console.log('questionData', data.data)
-          app.globalData.questionData = data.data;
-          var questionData = data.data;
-          var showPage;
-          if (questionData.type === 4) {
-            //  答题活动排行榜未生成，答题失败.显示答题失败页面
-            showPage = 2;
-            // return;
-          } else if (questionData.type === 5) {
-            // 答题活动排行榜未生成，答题成功.显示答题成功页面
-            showPage = 1;
-            // return;
-          } else {
-            showPage = 0;
-          }
-        
-          _this.setData({ 
-            showPage,
-            shareImage2: questionData.share_image,
-            shareTitle2: questionData.share_msg,
-            questionData: app.globalData.questionData,
-            duration: parseInt(app.globalData.questionData.duration) * 100,
-            score: app.globalData.questionData.score
-          })
-          wx.hideLoading();
-          _this.getTimeTip();
-          _this.initItem(this.data.questionData);
-        }
-      }
-    });
-
+    _this.initItem(app.globalData.questionData);
   },
 
   scaleItem: function() {
-    console.log('888888')
+  
     var animation = wx.createAnimation({
       duration: 1000,
       timingFunction: 'ease',
@@ -366,6 +322,7 @@ Page({
       success: ({data}) => {
         wx.hideLoading();
         if (data.code === 0) {
+          console.log(data.data);
           _this.initItem(data.data);
           _this.getTimeTip();
           _this.setData({ 
@@ -374,8 +331,9 @@ Page({
             duration: parseInt(data.data.duration) * 100,
             score: data.data.score,
             isShowPopup: false,
-            showTime2: data.data.score
+            showTime2: data.data.score,
           })
+
         }
       }
     });

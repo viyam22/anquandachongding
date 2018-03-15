@@ -32,7 +32,7 @@
 
   <view class="lose" wx:if="{{showPage === 2}}">
   <!--../../images/img-fail.png-->
-    <image class="img-fail" src="{{fail}}"></image>
+    <image mode="aspectFit" class="img-fail" src="{{fail}}"></image>
     <button class="btn invitation-btn" open-type="share">邀请</button>
   </view>
 

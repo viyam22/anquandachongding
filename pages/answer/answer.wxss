@@ -71,6 +71,7 @@
 }
 .btn-box {
 	margin-top: 170rpx;
+  z-index: 99;
 }
 .share-btn {
 	float: left;
@@ -173,7 +174,7 @@
   width: 100%;
   top: -90%;
   left: 0;
-  z-index: 0;
+  z-index: -1;
 
 }
 .time-tip {

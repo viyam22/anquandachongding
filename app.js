@@ -25,6 +25,7 @@ App({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           // 获取用户信息
           wx.getUserInfo({
+      
             success: ({ userInfo }) => {
               this.globalData.userInfo = userInfo;
 
@@ -108,9 +109,9 @@ App({
         openid: _this.globalData.openid,
         openid_s: _this.globalData.shareId
       },
-      
       success: ({data}) => {
-        console.log('userInvite', data.msg)
+
+        console.log('userInvite', _this.globalData.openid + '-' + _this.globalData.shareId);
       }
     });
   },

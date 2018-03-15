@@ -74,6 +74,9 @@ page {
 .info .nickname {
 	width: 150rpx;
 	float: left;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 .info .time {
 	width: 230rpx;
@@ -127,6 +130,9 @@ page {
 .rank-item .nickname, .rank-item .time {
 	width: 230rpx;
 	float: left;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
 }
 .exchange-btn {
 	margin: 28rpx auto;

@@ -2,7 +2,7 @@
   <swiper class="banner-swiper" indicator-dots="true" indicator-color="rgba(255, 255, 255, 0.3)" indicator-active-color="#fff">
     <block>
       <swiper-item wx:for="{{indexData.poster}}" wx:key="{{item.id}}">
-        <image src="{{item.image}}" background-size="cover" style="width:100%;height:100%;"/>
+        <image src="{{item.image}}" background-size="100% 100%" style="width:100%;height:100%;"/>
       </swiper-item>
     </block>
   </swiper>

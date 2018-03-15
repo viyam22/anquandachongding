@@ -5,8 +5,8 @@
   <view class="info">
     <view class="title">账户余额</view>
     <view class="text">{{money}}</view>
-
-    <view class="btn submit-btn {{money==='￥0'?'ban-btn':''}}" bindtap="{{money!=='￥0'?submit:''}}">提现</view>
+    
+    <view class="btn submit-btn {{money==='￥0'?'ban-btn':''}}" bindtap="{{money!=='￥0'?'submit':''}}">提现</view>
   </view>
 
   <view class="service">客服电话：{{phone}}</view>
